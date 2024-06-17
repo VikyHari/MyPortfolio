@@ -105,12 +105,12 @@ function Projects() {
                                                 {item?.button}
                                             </button>
                                         </div>
-                                        <div className="card-emty-box">
+                                        {/* <div className="card-emty-box">
 
                                         </div>
                                         <div className="card-emty-box1">
 
-                                        </div>
+                                        </div> */}
                                     </div>
                                 )
                             })}
