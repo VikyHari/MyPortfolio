@@ -10,7 +10,7 @@
         display: flex;
         .left-section-lms {
             width: 10%;
-            border: 2px solid orange;
+            border: 2px solid #EF0107;
             @include mdBreakPoint {
                 display: none;
             }

@@ -50,7 +50,7 @@
         position: absolute;
         width: 22px;
         height: 22px;
-        background-color: orange;
+        background-color: #EF0107;
         opacity: 0.1;
         left: 50%;
         top: 50%;
@@ -164,7 +164,7 @@
                     }
                 }
                 .activeTab {
-                    background-color: #f48c06;
+                    background-color:#EF0107;
                     padding: 10px 30px;
                     border-radius: 10px;
                     color: white;
@@ -219,7 +219,7 @@
                     .left-icons {
                         font-size: 1.4rem;
                         cursor: pointer;
-                        color: #f48c06;
+                        color:#EF0107;
                         padding: 20px;
                         border-radius: 50%;
                         width: 35px;
@@ -245,7 +245,7 @@
                 .language-names {
                     font-size: 1.5rem;
                     font-size: 600;
-                    color: #ba68c8;
+                    color: #f48c06;
                 }
                 .language-texts {
                     font-size: 1.2rem;
@@ -314,7 +314,7 @@
                 cursor: pointer;
             }
             .matername {
-                color: #f48c06;
+                color:#EF0107;
                 font-weight: 600;
             }
             .clgname {
@@ -325,7 +325,7 @@
             }
             .clgnames {
                 font-weight: 550;
-                color: #ba68c8;
+                color: #f48c06;
             }
             .skill-box {
                 width: 25%;
@@ -429,5 +429,5 @@
 }
 
 .cal-icon {
-    color: #ba68c8;
+    color: #f48c06;
 }

@@ -6,15 +6,15 @@
   color: white !important;
   border-radius: 8px;
   cursor: pointer;
-  background: #f48c06;
+  background:#EF0107;
   width: 100%;
   font-weight: 600;
 }
 
 .donwloadbutton {
-  border: 1px solid #f48c06;
+  border: 1px solid#EF0107;
   padding: 10px 50px;
-  color: orangered;
+  color: #EF0107red;
   border-radius: 8px;
   cursor: pointer;
   background: white;
@@ -30,7 +30,7 @@
 // hover section
 
 .donwloadbutton:hover {
-  background-color: #f48c06;
+  background-color:#EF0107;
   padding: 10px 50px;
   color: white;
   transition: 1s;

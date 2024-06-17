@@ -57,7 +57,7 @@
                     gap: 20px;
                 }
                 .icon-color {
-                    color: #ba68c8;
+                    color: #f48c06;
                     font-size: 1.4rem;
                     cursor: pointer;
                 }
@@ -76,13 +76,13 @@
 
 .form-section {
     width: 70% !important;
-    border: 3px solid #dcb3e3 !important;
+    border: 3px solid #f48c06 !important;
     @include xsBreakPoint {
         width: 90% !important;
     }
 }
 .buttonsubmit {
-    background-color: #ba68c8;
+    background-color: #f48c06;
     border: none;
     width: 70%;
     padding: 10px;
@@ -92,13 +92,13 @@
 }
 .buttonsubmit:hover {
     background-color: white;
-    border: 1px solid #ba68c8;
-    color: #ba68c8;
+    border: 1px solid #f48c06;
+    color: #f48c06;
 }
 
 .getin {
     font-size: 2rem;
-    color: #ba68c8;
+    color: #f48c06;
     font-weight: 600;
 }
 

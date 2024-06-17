@@ -10,7 +10,7 @@ import person2 from '../../assests/images/person2.png';
 import person3 from '../../assests/images/person3.png';
 import { Typewriter } from 'react-simple-typewriter'
 import Modal from 'react-bootstrap/Modal';
-import pdf from '../../assests/Resume.pdf';
+import pdf from '../../assests/VigneshUpdatedResume.pdf';
 
 import AOS from 'aos';
 function Home({ colorName, theme }) {
@@ -43,7 +43,7 @@ function Home({ colorName, theme }) {
 
 
     const LinkedInPath = () => {
-        window.open('https://www.linkedin.in/vigneshwar-h1222')
+        window.open('https://www.linkedin.com/in/vigneshwar-h1222')
     }
 
     const GithubPath = () => {
@@ -106,9 +106,9 @@ function Home({ colorName, theme }) {
                                 data-aos-easing="linear"
                                 data-aos-duration="1500"
                             >
-                                <span className='k-text'>V</span>igneshwar H <span style={{ color: 'orange', fontWeight: 'bold', fontSize: "1rem" }}>(
+                                <span className='k-text'>V</span>igneshwar H <span style={{ color: '#EF0107', fontWeight: 'bold', fontSize: "1rem" }}>(
                                     <Typewriter
-                                        words={['Reactjs 😃', 'Nextjs 😃', 'ReactNative 😃', 'Nodejs 😃']}
+                                        words={['Reactjs 😃', 'ReactNative 😃',]}
                                         loop={5}
                                         cursor
                                         cursorStyle='_'
@@ -209,7 +209,7 @@ function Home({ colorName, theme }) {
                             </div>
                             <div className='happy-client-text' >
                                 <div className='text-years'>
-                                    3+</div>
+                                    1+</div>
                                 <div className='year-text'>
                                     Years of <br />Experience
                                 </div>
@@ -223,7 +223,7 @@ function Home({ colorName, theme }) {
                             </div>
                             <div className='happy-client-text'>
                                 <div className='text-years'>
-                                    10+</div>
+                                    3+</div>
                                 <div className='year-text'>
                                     Projects <br />Completed
                                 </div>
