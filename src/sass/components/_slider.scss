@@ -1,0 +1,21 @@
+@use "../abstract" as *;
+
+.select {
+    width: 20vw !important;
+    margin-left: 10px;
+    @include xsBreakPoint {
+        width: 40vw !important;
+    }
+    @include smBreakPoint {
+        width: 40vw !important;
+    }
+    @include mdBreakPoint {
+        width: 30vw !important;
+    }
+    @include lgBreakPoint {
+        width: 25vw !important;
+    }
+    @include xlBreakPoint {
+        width: 30vw !important;
+    }
+}

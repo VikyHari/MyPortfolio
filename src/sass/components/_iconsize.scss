@@ -1,0 +1,241 @@
+@use "../abstract" as *;
+.icon-size {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.icon-sizes {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.icon-sizes-small {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.eyeicon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.lmslogo {
+  width: 98px;
+  height: 50px;
+  object-fit: contain;
+}
+.lmslogomobile {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.otp-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  cursor: pointer;
+}
+.otp-icon-edit {
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.profile-image-icon {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #e81402;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.cart-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.refer-logo {
+  width: 130px;
+  height: 99px;
+  cursor: pointer;
+  object-fit: contain;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include lgBreakPoint {
+    width: 120px;
+    height: 99px;
+  }
+}
+
+.course-image-box {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+.coupon-logo-size {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.fa-bars {
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.dahboard-icons {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.course-images {
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.bannerimage {
+  width: 100%;
+  height: 200x;
+  cursor: pointer;
+  border-radius: 10px;
+  @include xsBreakPoint {
+    width: 100%;
+    height: 100px;
+  }
+  @include smBreakPoint {
+    width: 100%;
+    height: 140px;
+  }
+}
+
+.no-image {
+  width: 400px;
+  height: 300px;
+  object-fit: contain;
+  cursor: pointer;
+  @include xsBreakPoint {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.course-images-bundle {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.course-images12 {
+  width: 100%;
+  object-fit: contain;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.main-card-bundles {
+  width: 100%;
+  height: 100%;
+  // border: 1px solid red;
+  border: 1px solid #e5e5e5;
+
+  border-radius: 10px;
+  .image-card-top {
+    width: 100%;
+    height: 82%;
+  }
+  .bottom-text-image {
+    height: 18%;
+  }
+}
+
+.main-card-bundles1 {
+  width: 26%;
+  height: 100% !important;
+  // border: 1px solid red;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  @include xsBreakPoint {
+    width: 100% !important;
+  }
+  @include smBreakPoint {
+    width: 48% !important;
+  }
+  @include mdBreakPoint {
+    width: 48% !important;
+  }
+  @include lgBreakPoint {
+    width: 48% !important;
+  }
+  @include xlBreakPoint {
+    width: 35% !important;
+    height: 100% !important;
+  }
+  .image-card-top1 {
+    width: 100%;
+    height: 320px !important;
+    @include smBreakPoint {
+      height: 280px !important;
+    }
+    @include mdBreakPoint {
+      height: 375px !important;
+    }
+    @include lgBreakPoint {
+      height: 330px !important;
+    }
+    @include xlBreakPoint {
+      height: 300px !important;
+    }
+  }
+  .bottom-text-image1 {
+    height: 48px !important;
+    // border: 1px solid red;
+  }
+}
+
+.cardactivess1 {
+  width: 26.4%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.course-images12-cards {
+  width: 100% !important;
+  object-fit: contain;
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 30px;
+}

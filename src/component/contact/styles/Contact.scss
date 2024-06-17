@@ -1,0 +1,123 @@
+@use "../../../sass/abstract/" as *;
+
+.main-contact-section {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    @include xsBreakPoint {
+        width: 100%;
+        height: auto;
+        padding: 10% 2px;
+    }
+    @include smBreakPoint {
+        width: 100%;
+        height: auto;
+        padding: 10% 2px;
+    }
+    .inside-contact-section {
+        width: 100%;
+        .contact-box {
+            width: 80%;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            @include xsBreakPoint {
+                flex-direction: column;
+            }
+            @include smBreakPoint {
+                flex-direction: column;
+            }
+            .left-contact-box {
+                width: 50%;
+                @include xsBreakPoint {
+                    width: 100%;
+                }
+                @include smBreakPoint {
+                    width: 100%;
+                }
+            }
+            .right-contact-box {
+                width: 50%;
+                @include xsBreakPoint {
+                    width: 100%;
+                }
+                @include smBreakPoint {
+                    width: 100%;
+                    padding-top: 10%;
+                }
+
+                .contactimage {
+                    width: 100%;
+                    height: 400px;
+                    object-fit: contain;
+                    cursor: pointer;
+                }
+                .box-forms {
+                    display: flex;
+                    gap: 20px;
+                }
+                .icon-color {
+                    color: #ba68c8;
+                    font-size: 1.4rem;
+                    cursor: pointer;
+                }
+                .contactname {
+                    font-weight: 500;
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                    @include themed() {
+                        color: t($greytextgrey);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.form-section {
+    width: 70% !important;
+    border: 3px solid #dcb3e3 !important;
+    @include xsBreakPoint {
+        width: 90% !important;
+    }
+}
+.buttonsubmit {
+    background-color: #ba68c8;
+    border: none;
+    width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+}
+.buttonsubmit:hover {
+    background-color: white;
+    border: 1px solid #ba68c8;
+    color: #ba68c8;
+}
+
+.getin {
+    font-size: 2rem;
+    color: #ba68c8;
+    font-weight: 600;
+}
+
+.we-texts {
+    @include themed() {
+        color: t($greytextgrey);
+    }
+}
+
+.label-texts {
+    font-weight: 550;
+    font-size: 1.2rem;
+    @include themed() {
+        color: t($greytext) !important;
+    }
+}
+
+::placeholder {
+    @include themed() {
+        color: t($greytext) !important;
+    }
+}

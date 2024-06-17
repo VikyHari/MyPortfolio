@@ -1,0 +1,43 @@
+@use "../abstract" as *;
+
+.hireme {
+  border: none;
+  padding: 10px 50px;
+  color: white !important;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #f48c06;
+  width: 100%;
+  font-weight: 600;
+}
+
+.donwloadbutton {
+  border: 1px solid #f48c06;
+  padding: 10px 50px;
+  color: orangered;
+  border-radius: 8px;
+  cursor: pointer;
+  background: white;
+  width: 100%;
+  font-weight: 600;
+  transition: 1s;
+
+  @include themed() {
+    color: t($greytextfixed);
+  }
+}
+
+// hover section
+
+.donwloadbutton:hover {
+  background-color: #f48c06;
+  padding: 10px 50px;
+  color: white;
+  transition: 1s;
+}
+
+// a tags
+a {
+  color: white !important;
+  text-align: none !important;
+}

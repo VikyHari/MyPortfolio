@@ -1,0 +1,38 @@
+@use "../abstract" as *;
+
+.main-section-lms {
+    width: 100%;
+    height: 100%;
+    border: 1px solid blue;
+    .inside-main-section-lms {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        .left-section-lms {
+            width: 10%;
+            border: 2px solid orange;
+            @include mdBreakPoint {
+                display: none;
+            }
+            @include smBreakPoint {
+                display: none;
+            }
+            @include xsBreakPoint {
+                display: none;
+            }
+        }
+        .right-section-lms {
+            width: 90%;
+            border: 2px solid green;
+            @include mdBreakPoint {
+                width: 100%;
+            }
+            @include smBreakPoint {
+                width: 100%;
+            }
+            @include xsBreakPoint {
+                width: 100%;
+            }
+        }
+    }
+}

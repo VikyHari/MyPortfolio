@@ -1,0 +1,53 @@
+@use "variables" as *;
+
+$primary: "primary";
+$secondary: "secondary";
+
+$background: "background";
+$background-alt: "background-alt";
+
+$text-black: "text-black";
+$text-white: "text-white";
+$text-grey: "text-grey";
+
+$input-focused: "input-focused";
+
+$inverter: "inverter";
+$text: "text";
+
+$backgroundbg: "backgroundbg";
+$greytext: "greytext";
+$greytextgrey: "greytextgrey";
+$cardbg: "cardbg";
+$greytextfixed:'greytextfixed';
+$themes: (
+    light: (
+        primary: $primary--light,
+        secondary: $secondary--light,
+        background: $background--light,
+        background-alt: $background-alt--light,
+        text: $text-black--light,
+        inverter: $inverter--light,
+        // new colors
+        backgroundbg: $background-color--light-bg,
+        greytext: $mytext-light-grey,
+        greytextgrey: $mytext-light-grey-one,
+        cardbg: $shadow-lg--light,
+        greytextfixed:$mytext-light-grey-fixed
+    ),
+    dark: (
+        primary: $primary--dark,
+        secondary: $secondary--dark,
+        background: $background--dark,
+        background-alt: $background-alt--dark,
+        text: $text-black--dark,
+        inverter: $inverter--dark,
+        // new colors
+        backgroundbg: $background-color--dark-bg,
+        greytext: $mytext-dark-grey,
+        greytextgrey: $mytext-dark-grey-one,
+        cardbg: $shadow-lg--dark,
+        greytextfixed:$mytext-dark-grey-fixed
+
+    )
+);

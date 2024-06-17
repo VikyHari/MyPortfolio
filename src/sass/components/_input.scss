@@ -1,0 +1,52 @@
+@use "../abstract" as *;
+
+.input-search-bar {
+  border: none;
+  width: 20vw !important;
+  outline: none !important;
+  margin-right: 115px;
+}
+
+.form-inputs-common {
+  border: 1px solid #e5e5e5 !important;
+  width: 100% !important;
+  outline: none;
+}
+
+form .form-control:focus {
+  border-color: #e5e5e5 !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+}
+
+.login-form-inputs {
+  width: 26vw !important;
+  height: 44px !important;
+
+  @include xsBreakPoint {
+    width: 85vw !important;
+  }
+  @include smBreakPoint {
+    width: 68vw !important;
+  }
+  @include mdBreakPoint {
+    width: 35vw !important;
+  }
+  @include lgBreakPoint {
+    width: 33vw !important;
+  }
+  @include xlBreakPoint {
+    width: 30vw !important;
+  }
+}
+
+// otp section
+
+.input-box-otp {
+  border: 1px solid #e5e5e5 !important;
+  height: 50px !important;
+  width: 50px !important;
+  border-radius: 10px !important;
+  cursor: pointer;
+  outline: none !important;
+}

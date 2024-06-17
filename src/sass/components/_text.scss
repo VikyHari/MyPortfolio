@@ -1,0 +1,86 @@
+@use "../abstract/" as *;
+
+// large text
+
+.large-text {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+// medium text
+
+.medium-text {
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    margin-top: 10px;
+    color: #333333 !important;
+}
+
+// middle text
+
+.middle-text {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+// button text
+
+.button-text {
+    font-size: 16px;
+    font-weight: 600;
+  
+}
+
+// paragraph text
+
+.pragraph-text {
+    font-size: 16px;
+    font-weight: 400;
+   
+}
+
+// lable text
+
+.label-text {
+    font-size: 14px;
+    font-weight: 500 !important;
+   
+}
+
+// small text
+.small-text {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.sidebar-text-size {
+    font-size: 14px !important;
+    font-weight: 400;
+}
+
+.shorttext {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.carousel-text {
+    width: 54%;
+    line-height: 1.7;
+    text-align: center;
+    padding-top: 3%;
+    font-size: 20px;
+}
+.carousel-heading-text {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.user-name-text {
+    color: #e81402;
+}
+
+
+a{
+    text-decoration: none !important;
+}
