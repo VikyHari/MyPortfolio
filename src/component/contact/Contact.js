@@ -134,7 +134,7 @@ function Contact({ colorName }) {
                                             <div>
                                                 {item?.image}
                                             </div>
-                                            <div className='contactname'>
+                                            <div className='contactname' style={{borderWidth:'1px solid black'}} >
                                                 {item?.name}
                                             </div>
                                         </div>

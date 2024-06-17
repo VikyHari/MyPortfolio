@@ -196,7 +196,7 @@ function App() {
                             id={item?.ToolName}
                             place="left"
                             content={item?.ToolName}
-                            className='kalai'
+                            className='vigneshwar'
                           /></>
                         }
                       </div>

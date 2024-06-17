@@ -10,7 +10,7 @@ import person2 from '../../assests/images/person2.png';
 import person3 from '../../assests/images/person3.png';
 import { Typewriter } from 'react-simple-typewriter'
 import Modal from 'react-bootstrap/Modal';
-import pdf from '../../assests/Kalai-resume.pdf';
+import pdf from '../../assests/Resume.pdf';
 
 import AOS from 'aos';
 function Home({ colorName, theme }) {
@@ -43,11 +43,11 @@ function Home({ colorName, theme }) {
 
 
     const LinkedInPath = () => {
-        window.open('https://www.linkedin.com/feed/')
+        window.open('https://www.linkedin.in/vigneshwar-h1222')
     }
 
     const GithubPath = () => {
-        window.open('https://github.com/KalaiRoman?tab=repositories')
+        window.open('https://github.com/VikyHari')
     }
     const handleType = (count) => {
     }
@@ -106,7 +106,7 @@ function Home({ colorName, theme }) {
                                 data-aos-easing="linear"
                                 data-aos-duration="1500"
                             >
-                                <span className='k-text'>K</span>alaisurya <span style={{ color: 'orange', fontWeight: 'bold', fontSize: "1rem" }}>(
+                                <span className='k-text'>V</span>igneshwar H <span style={{ color: 'orange', fontWeight: 'bold', fontSize: "1rem" }}>(
                                     <Typewriter
                                         words={['Reactjs 😃', 'Nextjs 😃', 'ReactNative 😃', 'Nodejs 😃']}
                                         loop={5}
@@ -147,7 +147,7 @@ function Home({ colorName, theme }) {
                                 <div data-aos="fade-up"
                                     data-aos-duration="3000">
                                     <button className='hireme'>
-                                        <a href="mailto:kalaimca685@gmail.com">
+                                        <a href="mailto:vikyhari321@gmail.com">
                                             Hire Me
                                         </a>
                                     </button>
@@ -156,7 +156,7 @@ function Home({ colorName, theme }) {
                                     data-aos-easing="linear"
                                     data-aos-duration="1500">
                                     <button className='donwloadbutton'>
-                                        <a href={pdf} download="Kalai-resume.pdf" className='pdf'>
+                                        <a href={pdf} download="vigneshwar-resume.pdf" className='pdf'>
                                             Download CV
                                         </a>
                                     </button>
