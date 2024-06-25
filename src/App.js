@@ -155,7 +155,7 @@ function App() {
         </div>
       </div> : <>
         <div className={theme ? "theme--dark" : "theme--light"}>
-          <AnimatedCursor
+          {/* <AnimatedCursor
             innerSize={10}
             outerSize={30}
             color='255, 46, 99'
@@ -163,7 +163,7 @@ function App() {
             innerScale={0.6}
             outerScale={0}
             className="mouse-section"
-          />
+          /> */}
           <div className={"Dektop-section "}>
             <div className="main-section">
               <div className='middle-header'>

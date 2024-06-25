@@ -10,7 +10,7 @@ import person2 from '../../assests/images/person2.png';
 import person3 from '../../assests/images/person3.png';
 import { Typewriter } from 'react-simple-typewriter'
 import Modal from 'react-bootstrap/Modal';
-import pdf from '../../assests/VigneshUpdatedResume.pdf';
+import pdf from '../../assests/VigneshwarResumeLatest.pdf';
 
 import AOS from 'aos';
 function Home({ colorName, theme }) {
@@ -92,14 +92,11 @@ function Home({ colorName, theme }) {
                 <div className='inside-section'>
                     <div className='home-left' style={{ color: colorName }}>
                         <div className='left-inside-home'>
-                            <div className='web-text mb-2' style={{ color: colorName }} data-aos-easing="linear"
-                                data-aos-duration="1500" data-aos="fade-down">
-                                <span className='w-text animate__animated animate__bounce animate__repeat-3 	3 animate__slow 2s'> W</span>EB<span className='w-text animate__animated animate__bounce animate__repeat-2 	2 animate__slow 3s'>D</span>EVELOPER
-                            </div>
+                           
                             <div className='myname-text' data-aos="fade-right"
                                 data-aos-easing="linear"
                                 data-aos-duration="1500">
-                                Hello, My name is
+                                Hello, I am
                             </div>
                             <div className='myname-text'
                                 data-aos="flip-left"
@@ -120,12 +117,11 @@ function Home({ colorName, theme }) {
                                     /> )
                                 </span>
                             </div>
-                            <div className='build-text mt-3' data-aos="zoom-in-right"
-                                data-aos-easing="linear"
-                                data-aos-duration="1500"
-                            >
-                                A Building Applications with Front End Developer Operations.
+                            <div className='web-text mb-2 mt-3' style={{ color: colorName }} data-aos-easing="linear"
+                                data-aos-duration="1500" data-aos="fade-down">
+                                 FRONT-END DEVELOPER
                             </div>
+                           
                             <div className='home-social-icons mt-4 mb-2'>
                                 <div data-aos="fade-right"
                                     data-aos-easing="linear"

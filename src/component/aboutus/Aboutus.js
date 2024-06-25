@@ -75,7 +75,7 @@ function Aboutus({ colorName }) {
                                     )
                                 })}
                             </div>
-                            <div className='mt-4 inside-about-section-lefts'>
+                            <div className=' d-flex justify-content-center mt-4 inside-about-section-lefts'>
                                 {selectName == "Personal Info" && <div>
                                     <div className='decsription' >
                                         {PersonalContent?.desc}
