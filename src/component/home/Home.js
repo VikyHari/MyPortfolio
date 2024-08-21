@@ -10,7 +10,7 @@ import person2 from '../../assests/images/person2.png';
 import person3 from '../../assests/images/person3.png';
 import { Typewriter } from 'react-simple-typewriter'
 import Modal from 'react-bootstrap/Modal';
-import pdf from '../../assests/VigneshwarResumeLatest.pdf';
+import pdf from '../../assests/Vignesh-Resume-react.pdf';
 
 import AOS from 'aos';
 function Home({ colorName, theme }) {

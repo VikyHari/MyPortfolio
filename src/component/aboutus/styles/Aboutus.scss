@@ -130,7 +130,7 @@
                     width: 100%;
                 }
                 .aboutus-tab-section {
-                    width: 65%;
+                    width: 70%;
                     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
                     display: flex;
                     border-radius: 10px;
@@ -179,7 +179,7 @@
                 }
                 .decsription {
                     width: 80%;
-                    font-size: 1.2rem;
+                    font-size: 1.5rem;
                     line-height: 1.7;
                     cursor: pointer;
                     font-weight: 500;
@@ -234,7 +234,7 @@
                         transform: translateY(-5px) rotate(360deg);
                     }
                     .main-about-texts {
-                        font-size: 1.2rem;
+                        font-size: 1.5rem;
                         font-weight: 500;
                         font-family: "Poppins", sans-serif !important;
                         @include themed() {
@@ -248,7 +248,7 @@
                     color: #f48c06;
                 }
                 .language-texts {
-                    font-size: 1.2rem;
+                    font-size: 1.5rem;
                     font-weight: 500;
                     display: flex;
                     width: 13%;
@@ -262,6 +262,10 @@
             }
             .qualification-section {
                 width: 80%;
+                display: flex;
+                justify-content: center;
+                // border: 1px solid black;
+                
                 @include xsBreakPoint {
                     flex-direction: column;
                     width: 100%;
@@ -283,12 +287,17 @@
                     margin: 0 auto;
                 }
                 @include xlBreakPoint {
-                    width: 90%;
+                    width: 100%;
                 }
                 .qulification-box {
-                    width: 50%;
+                    // border: 1px solid black;
+                    width: 100%;
                     display: flex;
+                    // flex-direction: column;
+                    border-radius: 8px;
+                    // justify-content: center;
                     gap: 20px;
+                    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
                     @include xsBreakPoint {
                         width: 100%;
                     }
@@ -312,6 +321,7 @@
             .list-educations {
                 line-height: 1.8;
                 cursor: pointer;
+                // border: 1px solid black;
             }
             .matername {
                 color:#EF0107;

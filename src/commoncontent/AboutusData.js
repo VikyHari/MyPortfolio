@@ -52,24 +52,14 @@ export const Qualifications = [
    
     {
         id: 2,
-        name: "Higher Secondary School",
-        dgname: "( HSC )",
-        year: "2016 - 2018",
-        clgName: "All Angels Matriculation Higher Secondary School",
+        name: "Java Full Stack Development Course",
+        dgname: "(react, java, oracle)",
+        year: "Feb23 - Aug23",
+        clgName: "Besant Technologies",
         place: "Chennai",
         calicon: <i class="fa-regular fa-calendar cal-icon"></i>
 
     },
-    {
-        id: 3,
-        name: "Secondary School Leaving Certificate",
-        dgname: "( SSLC )",
-        year: "2013",
-        clgName: "All Angels Matriculation Higher Secondary School",
-        place: "Chennai",
-        calicon: <i class="fa-regular fa-calendar cal-icon"></i>
-
-    }
 ]
 
 
