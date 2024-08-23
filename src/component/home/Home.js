@@ -53,6 +53,7 @@ function Home({ colorName, theme }) {
     }
 
     const handleDone = () => {
+        
     }
     return (
         <>
@@ -105,10 +106,10 @@ function Home({ colorName, theme }) {
                             >
                                 <span className='k-text'>V</span>igneshwar H <span style={{ color: '#EF0107', fontWeight: 'bold', fontSize: "1rem" }}>(
                                     <Typewriter
-                                        words={['Reactjs 😃', 'ReactNative 😃',]}
+                                        words={['Reactjs', 'JavaScript','UI/UX Developement']}
                                         loop={5}
                                         cursor
-                                        cursorStyle='_'
+                                        cursorStyle='|'
                                         typeSpeed={70}
                                         deleteSpeed={50}
                                         delaySpeed={1000}

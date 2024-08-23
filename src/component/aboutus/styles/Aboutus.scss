@@ -340,9 +340,9 @@
             .skill-box {
                 width: 25%;
                 cursor: pointer;
-                padding: 10px 0px;
+                padding: 20px 0px;
                 text-align: center;
-                border-radius: 10px;
+                border-radius:20% 50% 50% 20%/100% 80% 100% 100%;
                 box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
                 @include xsBreakPoint {
                     width: 45% !important;

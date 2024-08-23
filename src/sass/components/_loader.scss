@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #111020 !important;
+    background-color: #FFF1DA !important;
 }
 
 .loading-cont {
@@ -24,7 +24,7 @@
     animation-iteration-count: infinite;
 }
 .loading-cont::before {
-    content: " ..😎.. ";
+    content: " Loading.. ";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -32,7 +32,7 @@
     width: 90%;
     height: 90%;
     border-radius: 50%;
-    color:#EF0107;
+    color:white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,7 +43,7 @@
     // 0 0 20px yellowgreen;
     // 0 0 30px yellowgreen;
     z-index: 111;
-    background-color: #111020;
+    background-color: #EF0107;
 }
 .loading-cont .cont span {
     position: absolute;

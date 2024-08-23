@@ -146,7 +146,8 @@ function App() {
   return (
     <>
 
-      {loader ? <div className='main-loader'>
+      {loader ? 
+      <div className='main-loader'>
         <div className="loading-cont">
           <div className="cont">
             <span></span>
