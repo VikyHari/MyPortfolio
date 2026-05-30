@@ -21,7 +21,9 @@ function makeParticleTexture() {
     g.addColorStop(1,   'rgba(255,255,255,0)');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, 64, 64);
-    return new THREE.CanvasTexture(c);
+    const t = new THREE.CanvasTexture(c);
+    t.flipY = false; // Fix WebGL2 texImage3D FLIP_Y warning
+    return t;
 }
 
 // ── Generate galaxy positions / colors ───────────────────────────────────────
@@ -218,10 +220,10 @@ function Home({ scrollTo }) {
             window.addEventListener('resize', onResize);
 
             // ── Render loop ───────────────────────────────────────────────────
-            const clock = new THREE.Clock();
+            const startTime = performance.now();
             const animate = () => {
                 raf = requestAnimationFrame(animate);
-                const t = clock.getElapsedTime();
+                const t = (performance.now() - startTime) * 0.001;
 
                 galaxy.rotation.y  = t * 0.04;
                 galaxy2.rotation.y = t * 0.025;
