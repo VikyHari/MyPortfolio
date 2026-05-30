@@ -5,6 +5,9 @@
   --bg:           #060614;
   --bg2:          #0c0c1e;
   --bg3:          #111130;
+  --gold:         #c9a96e;
+  --gold-dim:     rgba(201, 169, 110, 0.12);
+  --gold-border:  rgba(201, 169, 110, 0.25);
   --glass:        rgba(255, 255, 255, 0.04);
   --glass-md:     rgba(255, 255, 255, 0.07);
   --glass-hover:  rgba(255, 255, 255, 0.10);
@@ -196,7 +199,7 @@ img { max-width: 100%; display: block; }
 }
 
 .brand-dot {
-  color: var(--pink);
+  color: var(--gold);
   font-size: 1.6rem;
 }
 
@@ -221,7 +224,7 @@ img { max-width: 100%; display: block; }
   &__dot {
     width: 4px; height: 4px;
     border-radius: 50%;
-    background: var(--cyan);
+    background: var(--gold);
     animation: dotPop 0.3s ease;
   }
 
@@ -289,29 +292,30 @@ section {
 }
 
 .section-label {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 3px;
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--cyan);
-  margin-bottom: 14px;
+  color: var(--gold);
+  margin-bottom: 16px;
 
   &::before {
     content: '';
     display: block;
-    width: 32px; height: 2px;
-    background: var(--cyan);
-    border-radius: 1px;
+    width: 40px; height: 1px;
+    background: var(--gold);
+    opacity: 0.7;
   }
 }
 
 .section-title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -1px;
-  margin-bottom: 20px;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -3px;
+  margin-bottom: 24px;
+  color: var(--text);
 
   span {
     background: linear-gradient(135deg, var(--purple), var(--cyan));
@@ -323,9 +327,10 @@ section {
 
 .section-subtitle {
   color: var(--text-dim);
-  font-size: 1.05rem;
+  font-size: 1rem;
   max-width: 560px;
-  line-height: 1.8;
+  line-height: 1.9;
+  letter-spacing: 0.2px;
 }
 
 // ─── Glass Card Utility ────────────────────────────────────────────────────────
