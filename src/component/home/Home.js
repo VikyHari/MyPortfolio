@@ -68,12 +68,13 @@ function Home({ scrollTo }) {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        // Detect mobile — use drastically fewer particles to avoid memory crash
         const mobile = window.innerWidth <= 768;
 
-        // Check WebGL support before doing anything
-        const testCtx = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-        if (!testCtx) return; // WebGL not supported — just show CSS background
+        // Test WebGL on a SEPARATE temporary canvas — never steal context from the main canvas
+        const probe = document.createElement('canvas');
+        const probeCtx = probe.getContext('webgl') || probe.getContext('experimental-webgl');
+        if (!probeCtx) return; // no WebGL support at all
+        probe.width = probe.height = 1;
 
         let raf, renderer, galaxyGeo, galaxyMat, g2Geo, g2Mat, starGeo, starMat, tex;
 
@@ -98,14 +99,15 @@ function Home({ scrollTo }) {
 
             tex = makeParticleTexture();
 
-            // ── Galaxy disc — 8k on mobile, 80k on desktop ────────────────────
-            const galaxyCount = mobile ? 8000 : 80000;
+            // ── Galaxy disc ───────────────────────────────────────────────────
+            // Mobile: 25k (visible + beautiful), Desktop: 80k (full glory)
+            const galaxyCount = mobile ? 25000 : 80000;
             const { positions: gPos, colors: gCol } = buildGalaxy(galaxyCount);
             galaxyGeo = new THREE.BufferGeometry();
             galaxyGeo.setAttribute('position', new THREE.BufferAttribute(gPos, 3));
             galaxyGeo.setAttribute('color',    new THREE.BufferAttribute(gCol, 3));
             galaxyMat = new THREE.PointsMaterial({
-                size: mobile ? 0.05 : 0.018,
+                size: mobile ? 0.032 : 0.018,
                 sizeAttenuation: true,
                 vertexColors: true,
                 transparent: true,
@@ -116,33 +118,32 @@ function Home({ scrollTo }) {
             const galaxy = new THREE.Points(galaxyGeo, galaxyMat);
             scene.add(galaxy);
 
-            // ── Second ring — desktop only ────────────────────────────────────
-            let galaxy2 = null;
-            if (!mobile) {
-                const { positions: g2Pos, colors: g2Col } = buildGalaxy(30000, 14, 2, 0.5, 0.5, 2);
-                g2Geo = new THREE.BufferGeometry();
-                g2Geo.setAttribute('position', new THREE.BufferAttribute(g2Pos, 3));
-                g2Geo.setAttribute('color',    new THREE.BufferAttribute(g2Col, 3));
-                g2Mat = new THREE.PointsMaterial({
-                    size: 0.012, sizeAttenuation: true, vertexColors: true,
-                    transparent: true, opacity: 0.45, depthWrite: false,
-                    blending: THREE.AdditiveBlending, alphaMap: tex,
-                });
-                galaxy2 = new THREE.Points(g2Geo, g2Mat);
-                galaxy2.rotation.x = Math.PI * 0.15;
-                galaxy2.rotation.z = Math.PI * 0.1;
-                scene.add(galaxy2);
-            }
+            // ── Second outer ring — 8k on mobile, 30k on desktop ─────────────
+            const ring2Count = mobile ? 8000 : 30000;
+            const { positions: g2Pos, colors: g2Col } = buildGalaxy(ring2Count, 14, 2, 0.5, 0.5, 2);
+            g2Geo = new THREE.BufferGeometry();
+            g2Geo.setAttribute('position', new THREE.BufferAttribute(g2Pos, 3));
+            g2Geo.setAttribute('color',    new THREE.BufferAttribute(g2Col, 3));
+            g2Mat = new THREE.PointsMaterial({
+                size: mobile ? 0.025 : 0.012,
+                sizeAttenuation: true, vertexColors: true,
+                transparent: true, opacity: 0.45, depthWrite: false,
+                blending: THREE.AdditiveBlending, alphaMap: tex,
+            });
+            const galaxy2 = new THREE.Points(g2Geo, g2Mat);
+            galaxy2.rotation.x = Math.PI * 0.15;
+            galaxy2.rotation.z = Math.PI * 0.1;
+            scene.add(galaxy2);
 
-            // ── Stars — 4k on mobile, 25k on desktop ─────────────────────────
-            const starCount = mobile ? 4000 : 25000;
+            // ── Stars — 8k on mobile, 25k on desktop ─────────────────────────
+            const starCount = mobile ? 8000 : 25000;
             const starPositions = new Float32Array(starCount * 3);
             for (let i = 0; i < starCount * 3; i++) starPositions[i] = (Math.random() - 0.5) * 80;
             starGeo = new THREE.BufferGeometry();
             starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
             starMat = new THREE.PointsMaterial({
-                color: 0xffffff, size: mobile ? 0.08 : 0.04,
-                transparent: true, opacity: 0.6,
+                color: 0xffffff, size: mobile ? 0.06 : 0.04,
+                transparent: true, opacity: 0.65,
                 depthWrite: false, blending: THREE.AdditiveBlending, alphaMap: tex,
             });
             const stars = new THREE.Points(starGeo, starMat);
@@ -150,8 +151,8 @@ function Home({ scrollTo }) {
 
             // ── Wireframe shapes — 3 on mobile, 5 on desktop ─────────────────
             const shapeData = mobile ? [
-                { geo: new THREE.IcosahedronGeometry(1.4, 0), color: 0x8b5cf6, pos: [-3, 1, -3], spd: [0.004, 0.005] },
-                { geo: new THREE.OctahedronGeometry(0.9, 0),  color: 0x22d3ee, pos: [ 3, -1, -3], spd: [0.005, 0.004] },
+                { geo: new THREE.IcosahedronGeometry(1.4, 0), color: 0x8b5cf6, pos: [-3, 1, -3],   spd: [0.004, 0.005] },
+                { geo: new THREE.OctahedronGeometry(0.9, 0),  color: 0x22d3ee, pos: [ 3, -1, -3],  spd: [0.005, 0.004] },
                 { geo: new THREE.TetrahedronGeometry(0.7, 0), color: 0xf472b6, pos: [ 0, 2.5, -4], spd: [0.006, 0.007] },
             ] : [
                 { geo: new THREE.IcosahedronGeometry(1.6, 0), color: 0x8b5cf6, pos: [-5, 1.5, -3], spd: [0.003, 0.004] },
@@ -222,9 +223,9 @@ function Home({ scrollTo }) {
                 raf = requestAnimationFrame(animate);
                 const t = clock.getElapsedTime();
 
-                galaxy.rotation.y = t * 0.04;
-                if (galaxy2) galaxy2.rotation.y = t * 0.025;
-                stars.rotation.y = t * 0.006;
+                galaxy.rotation.y  = t * 0.04;
+                galaxy2.rotation.y = t * 0.025;
+                stars.rotation.y   = t * 0.006;
                 stars.rotation.x = t * 0.003;
 
                 shapes.forEach((mesh, i) => {
@@ -258,8 +259,9 @@ function Home({ scrollTo }) {
         }
     }, []);
 
-    // ── GSAP hero entrance ────────────────────────────────────────────────────
+    // ── GSAP hero entrance (desktop only — CSS handles mobile) ───────────────
     useEffect(() => {
+        if (window.innerWidth <= 768) return; // mobile uses CSS keyframe animation
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({ delay: 0.4 });
             tl.from('.hero__badge',          { y: 24, opacity: 0, duration: 0.8, ease: 'power3.out' })
