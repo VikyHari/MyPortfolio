@@ -1,0 +1,57 @@
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    background: #0a0a1a;
+    position: relative;
+
+    // Fade edges into page background
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0;
+        width: 100px;
+        z-index: 2;
+        pointer-events: none;
+    }
+    &::before { left: 0;  background: linear-gradient(to right, #060614, transparent); }
+    &::after  { right: 0; background: linear-gradient(to left,  #060614, transparent); }
+
+    &--reverse .marquee__track {
+        animation-direction: reverse;
+    }
+
+    &__track {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        width: max-content;
+        animation: marquee 22s linear infinite;
+    }
+
+    &__item {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(241, 245, 249, 0.28);
+        padding: 0 22px;
+        transition: color 0.2s ease;
+
+        &:hover { color: #22d3ee; }
+    }
+
+    &__dot {
+        color: #8b5cf6;
+        font-size: 0.65rem;
+        opacity: 0.5;
+        padding: 0 4px;
+    }
+}
+
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}

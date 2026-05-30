@@ -1,1 +1,114 @@
-@use "../../../sass/abstract/" as *;
+// ─── Footer ───────────────────────────────────────────────────────────────────
+.footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--glass-border);
+    padding: 64px 0 32px;
+}
+
+.footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    text-align: center;
+
+    @media (max-width: 768px) { padding: 0 24px; }
+}
+
+.footer-brand {
+    font-size: 1.8rem;
+    font-weight: 900;
+    cursor: pointer;
+    letter-spacing: -1px;
+    user-select: none;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 0.8; }
+
+    &__v {
+        background: linear-gradient(135deg, var(--purple), var(--cyan));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    &__dot { color: var(--pink); }
+}
+
+.footer-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-link {
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    transition: 0.2s ease;
+    cursor: pointer;
+
+    &:hover { color: var(--text); background: var(--glass); }
+}
+
+.footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.footer-social {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    transition: 0.3s ease;
+
+    &:hover {
+        color: var(--cyan);
+        border-color: var(--cyan);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(34, 211, 238, 0.2);
+    }
+}
+
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--glass-border);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    @media (max-width: 600px) { justify-content: center; }
+}
+
+.footer-copy {
+    font-size: 0.8rem;
+    color: var(--text-dimmer);
+}
+
+.footer-role {
+    font-size: 0.78rem;
+    color: var(--text-dimmer);
+
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+}

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vigneshwar H — Resume</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --purple: #7c3aed;
+      --cyan: #0891b2;
+      --green: #059669;
+      --text: #111827;
+      --text-dim: #6b7280;
+      --text-dimmer: #9ca3af;
+      --border: #e5e7eb;
+      --bg: #ffffff;
+      --purple-bg: #f5f3ff;
+      --cyan-bg: #ecfeff;
+      --green-bg: #ecfdf5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 32px auto;
+      background: var(--bg);
+      box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 55%, #164e63 100%);
+      padding: 36px 48px 32px;
+      color: white;
+    }
+
+    .header__name {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .header__name span { color: #a78bfa; }
+
+    .header__role {
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 18px;
+    }
+
+    .header__contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 18px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+    }
+
+    /* ── Body ── */
+    .body {
+      display: grid;
+      grid-template-columns: 1fr 230px;
+    }
+
+    .main    { padding: 28px 36px 40px 48px; border-right: 1px solid var(--border); }
+    .sidebar { padding: 28px 28px 40px 24px; background: #fafafa; }
+
+    /* ── Section ── */
+    .section { margin-bottom: 26px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section__title {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 13px;
+      padding-bottom: 7px;
+      border-bottom: 2px solid var(--purple-bg);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .section__title::before {
+      content: '';
+      display: block;
+      width: 14px; height: 2px;
+      background: var(--purple);
+      border-radius: 1px;
+    }
+
+    /* ── Summary ── */
+    .summary {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.72;
+    }
+    .summary strong { color: var(--purple); font-weight: 600; }
+
+    /* ── Experience ── */
+    .exp-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .exp-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .exp-role {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .exp-company {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .exp-type {
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--text-dim);
+      background: #f3f4f6;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 7px;
+    }
+
+    .exp-current {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-bg);
+      border: 1px solid #a7f3d0;
+      border-radius: 100px;
+      padding: 2px 8px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .exp-meta {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .exp-period {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .exp-duration {
+      font-size: 11px;
+      color: var(--text-dimmer);
+      margin-bottom: 2px;
+    }
+
+    .exp-location {
+      font-size: 11px;
+      color: var(--text-dimmer);
+    }
+
+    .exp-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 10px;
+    }
+
+    .exp-bullets li {
+      font-size: 12.5px;
+      color: #4b5563;
+      padding-left: 14px;
+      margin-bottom: 4px;
+      position: relative;
+      line-height: 1.55;
+    }
+
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--purple);
+      font-size: 9px;
+      top: 3px;
+    }
+
+    .exp-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .exp-tag {
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+    .exp-tag--purple { background: var(--purple-bg); color: var(--purple); }
+    .exp-tag--cyan   { background: var(--cyan-bg);   color: #0e7490; }
+
+    /* ── Project ── */
+    .project { margin-bottom: 18px; }
+    .project:last-child { margin-bottom: 0; }
+
+    .project__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .project__name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .project__link {
+      font-size: 11px;
+      color: var(--cyan);
+      text-decoration: none;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .project__stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 5px;
+    }
+
+    .tag { padding: 2px 7px; background: var(--purple-bg); border-radius: 3px; font-size: 10px; font-weight: 600; color: var(--purple); }
+    .tag--cyan { background: var(--cyan-bg); color: #0e7490; }
+
+    .project__bullets { padding: 0; list-style: none; }
+    .project__bullets li {
+      font-size: 12.5px;
+      color: #4b5563;
+      margin-bottom: 3px;
+      padding-left: 12px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .project__bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--purple);
+      font-size: 9px;
+      top: 3px;
+    }
+
+    /* ── Sidebar: Education ── */
+    .edu-item { margin-bottom: 16px; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-degree { font-size: 12.5px; font-weight: 700; color: var(--text); margin-bottom: 2px; line-height: 1.4; }
+    .edu-school { font-size: 11.5px; color: #4b5563; font-weight: 500; margin-bottom: 2px; }
+    .edu-year   { font-size: 11px; color: var(--cyan); font-weight: 600; }
+    .divider    { height: 1px; background: var(--border); margin: 10px 0 14px; }
+
+    /* ── Sidebar: Skills ── */
+    .skill-group { margin-bottom: 14px; }
+    .skill-group:last-child { margin-bottom: 0; }
+    .skill-group__label { font-size: 9.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 4px; }
+    .skill-pill { padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 500; background: var(--purple-bg); color: var(--purple); }
+    .skill-pill--ai      { background: var(--green-bg); color: #065f46; }
+    .skill-pill--backend { background: #fff7ed; color: #9a3412; }
+
+    /* ── Top Skills ── */
+    .top-skill { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
+    .top-skill-num { font-size: 10px; color: var(--purple); font-weight: 700; background: var(--purple-bg); border-radius: 50%; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* ── Languages ── */
+    .lang-item { font-size: 12px; font-weight: 500; color: var(--text); display: flex; justify-content: space-between; margin-bottom: 5px; }
+    .lang-level { font-size: 11px; color: var(--text-dimmer); }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page { margin: 0; box-shadow: none; max-width: 100%; }
+      @page { margin: 0.4in 0.3in; size: A4; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header__name"><span>V</span>igneshwar H.</div>
+    <div class="header__role">Full Stack Developer &amp; AI Engineer</div>
+    <div class="header__contacts">
+      <a href="mailto:vikyhari321@gmail.com" class="contact-item">✉ vikyhari321@gmail.com</a>
+      <span class="contact-item">📱 +91 9344556276</span>
+      <span class="contact-item">📍 Chennai, India</span>
+      <a href="https://linkedin.com/in/vigneshwar-h1222" class="contact-item">in linkedin.com/in/vigneshwar-h1222</a>
+      <a href="https://github.com/VikyHari" class="contact-item">⌥ github.com/VikyHari</a>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- Summary -->
+      <div class="section">
+        <div class="section__title">Professional Summary</div>
+        <p class="summary">
+          Full Stack Developer with <strong>2+ years of professional experience</strong> building scalable web applications
+          and integrating AI into real-world products. Currently working at
+          <strong>AvironiX Drones</strong> as a Full-stack Developer focusing on
+          <strong>LLMOps, Agentic AI,</strong> and <strong>RAG pipeline</strong> development.
+          Passionate about building products where AI is not just a feature — but part of the system design.
+        </p>
+      </div>
+
+      <!-- Experience -->
+      <div class="section">
+        <div class="section__title">Professional Experience</div>
+
+        <!-- AvironiX -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Full-stack Developer</div>
+              <div class="exp-company">
+                AvironiX Drones
+                <span class="exp-type">Full-time</span>
+                <span class="exp-current">Current</span>
+              </div>
+            </div>
+            <div class="exp-meta">
+              <div class="exp-period">Jun 2025 – Present</div>
+              <div class="exp-duration">1 yr</div>
+              <div class="exp-location">Chennai, India · On-site</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Building full-stack AI-enabled features integrating LLMs into drone management and control systems</li>
+            <li>Designing and implementing RAG pipelines and Agentic AI workflows for real-time decision support</li>
+            <li>Developing scalable Node.js backend APIs and responsive React.js frontends</li>
+            <li>Working with LLMOps tooling, Model Context Protocol (MCP), and vector databases (ChromaDB)</li>
+          </ul>
+          <div class="exp-skills">
+            <span class="exp-tag exp-tag--purple">LLMOps</span>
+            <span class="exp-tag exp-tag--purple">Agentic AI</span>
+            <span class="exp-tag exp-tag--purple">RAG</span>
+            <span class="exp-tag exp-tag--purple">MCP</span>
+            <span class="exp-tag exp-tag--purple">React.js</span>
+            <span class="exp-tag exp-tag--purple">Node.js</span>
+            <span class="exp-tag exp-tag--purple">AI Pipelines</span>
+          </div>
+        </div>
+
+        <!-- CDP360 -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Frontend Developer</div>
+              <div class="exp-company">
+                CDP360 EdTech
+                <span class="exp-type">Full-time</span>
+              </div>
+            </div>
+            <div class="exp-meta">
+              <div class="exp-period">Sep 2023 – Jun 2025</div>
+              <div class="exp-duration">1 yr 10 mos</div>
+              <div class="exp-location">Chennai, India · On-site</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Built and maintained the CDP360 Learning Management System (LMS) at production scale using React.js</li>
+            <li>Developed NEET/JEE coaching platform and CDP360 corporate landing pages with responsive UI</li>
+            <li>Created the CDP360 Android mobile app with React Native including NEET/JEE mock test features</li>
+            <li>Implemented reusable component design systems with SASS, Bootstrap, and REST API integration</li>
+          </ul>
+          <div class="exp-skills">
+            <span class="exp-tag exp-tag--cyan">React.js</span>
+            <span class="exp-tag exp-tag--cyan">React Native</span>
+            <span class="exp-tag exp-tag--cyan">JavaScript</span>
+            <span class="exp-tag exp-tag--cyan">Bootstrap</span>
+            <span class="exp-tag exp-tag--cyan">REST APIs</span>
+            <span class="exp-tag exp-tag--cyan">SASS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="section">
+        <div class="section__title">Key Projects</div>
+
+        <div class="project">
+          <div class="project__header">
+            <div class="project__name">Local RAG System — AI Pipeline</div>
+            <a href="https://github.com/VikyHari" class="project__link">github.com/VikyHari ↗</a>
+          </div>
+          <div class="project__stack">
+            <span class="tag tag--cyan">Ollama</span><span class="tag tag--cyan">ChromaDB</span>
+            <span class="tag tag--cyan">RAG</span><span class="tag tag--cyan">LLMOps</span>
+            <span class="tag tag--cyan">Vector Embeddings</span><span class="tag">Python</span>
+          </div>
+          <ul class="project__bullets">
+            <li>Fully local RAG system using Ollama (Gemma) + ChromaDB with zero external API dependency</li>
+            <li>Processes PDFs, performs semantic vector search, and generates context-aware LLM responses</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <div class="project__header">
+            <div class="project__name">Learning Management System (LMS)</div>
+            <a href="http://edu.cdp360.org/" class="project__link">edu.cdp360.org ↗</a>
+          </div>
+          <div class="project__stack">
+            <span class="tag">React.js</span><span class="tag">SASS</span>
+            <span class="tag">Bootstrap</span><span class="tag">REST APIs</span>
+          </div>
+          <ul class="project__bullets">
+            <li>Production-scale LMS with dynamic course management and student progress tracking</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <div class="project__header">
+            <div class="project__name">Node.js REST API — Contacts Backend</div>
+            <a href="https://github.com/VikyHari/nodejs-contact-Backend" class="project__link">GitHub ↗</a>
+          </div>
+          <div class="project__stack">
+            <span class="tag">Node.js</span><span class="tag">Express.js</span>
+            <span class="tag">MongoDB</span><span class="tag">REST API</span>
+          </div>
+          <ul class="project__bullets">
+            <li>RESTful contacts API with full CRUD, MongoDB storage, and route-level validation</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <!-- Education -->
+      <div class="section">
+        <div class="section__title">Education</div>
+        <div class="edu-item">
+          <div class="edu-degree">B.E. — Computer Science &amp; Engineering</div>
+          <div class="edu-school">Meenakshi College of Engineering</div>
+          <div class="edu-school">Chennai</div>
+          <div class="edu-year">2018 – 2022</div>
+        </div>
+        <div class="divider"></div>
+        <div class="edu-item">
+          <div class="edu-degree">Java Full Stack Development</div>
+          <div class="edu-school">Besant Technologies, Chennai</div>
+          <div class="edu-school" style="font-style:italic;font-size:11px;color:#9ca3af">React · Java · Oracle</div>
+          <div class="edu-year">Feb 2023 – Aug 2023</div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="section">
+        <div class="section__title">Skills</div>
+        <div class="skill-group">
+          <div class="skill-group__label">AI / ML</div>
+          <div class="skill-pills">
+            <span class="skill-pill skill-pill--ai">RAG Pipelines</span>
+            <span class="skill-pill skill-pill--ai">LLMOps</span>
+            <span class="skill-pill skill-pill--ai">Agentic AI</span>
+            <span class="skill-pill skill-pill--ai">MCP</span>
+            <span class="skill-pill skill-pill--ai">Ollama</span>
+            <span class="skill-pill skill-pill--ai">ChromaDB</span>
+            <span class="skill-pill skill-pill--ai">Vector DB</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group__label">Frontend</div>
+          <div class="skill-pills">
+            <span class="skill-pill">React.js</span>
+            <span class="skill-pill">React Native</span>
+            <span class="skill-pill">JavaScript</span>
+            <span class="skill-pill">HTML5 / CSS3</span>
+            <span class="skill-pill">SASS</span>
+            <span class="skill-pill">Redux</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group__label">Backend &amp; Tools</div>
+          <div class="skill-pills">
+            <span class="skill-pill skill-pill--backend">Node.js</span>
+            <span class="skill-pill skill-pill--backend">Express.js</span>
+            <span class="skill-pill skill-pill--backend">REST APIs</span>
+            <span class="skill-pill skill-pill--backend">MongoDB</span>
+            <span class="skill-pill">Git / GitHub</span>
+            <span class="skill-pill">Bootstrap</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top LinkedIn Skills -->
+      <div class="section">
+        <div class="section__title">Top LinkedIn Skills</div>
+        <div class="top-skill"><span class="top-skill-num">1</span> React.js</div>
+        <div class="top-skill"><span class="top-skill-num">2</span> LLMOps</div>
+        <div class="top-skill"><span class="top-skill-num">3</span> RAG</div>
+        <div class="top-skill"><span class="top-skill-num">4</span> Agentic AI</div>
+        <div class="top-skill"><span class="top-skill-num">5</span> MCP</div>
+      </div>
+
+      <!-- Languages -->
+      <div class="section">
+        <div class="section__title">Languages</div>
+        <div class="lang-item">English <span class="lang-level">Professional</span></div>
+        <div class="lang-item">Tamil <span class="lang-level">Native</span></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;padding:18px;font-size:11px;color:#9ca3af">
+  File → Print → Save as PDF (set margins to None) &nbsp;|&nbsp;
+  <a href="/" style="color:#7c3aed">← Back to Portfolio</a>
+</div>
+
+</body>
+</html>

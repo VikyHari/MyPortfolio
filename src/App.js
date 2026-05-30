@@ -1,262 +1,180 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState, useRef } from 'react';
 import './App.scss';
-import { useEffect, useState } from 'react';
-import { ColorChangection } from './redux/actions/Color_Action';
-import Header from './component/header/Header';
-import Form from 'react-bootstrap/Form'
-import AnimatedCursor from 'react-animated-cursor';
-import cycle from './assests/images/cycle-img.png'
-import rocket from './assests/images/rocket-img.png'
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
+import Cursor from './component/cursor/Cursor';
 import Home from './component/home/Home';
-import { Tooltip as ReactTooltip } from 'react-tooltip'
 import Aboutus from './component/aboutus/Aboutus';
-
-import { Route, Routes, useNavigate } from "react-router-dom";
 import Projects from './component/projects/Projects';
 import WorkingTools from './component/workingtools/WorkingTools';
 import Contact from './component/contact/Contact';
+import Footer from './component/footer/Footer';
+import Marquee from './component/ui/Marquee';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const NAV_ITEMS = [
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'tools', label: 'Services' },
+    { id: 'contact', label: 'Contact' },
+];
 
 function App() {
+    const [activeSection, setActiveSection] = useState('home');
+    const [scrolled, setScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [loader, setLoader] = useState(true);
+    const [progress, setProgress] = useState(0);
+    const lenisRef = useRef(null);
 
+    // ── Loader ──────────────────────────────────────────────────────────────
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setProgress(p => {
+                if (p >= 100) {
+                    clearInterval(timer);
+                    setTimeout(() => setLoader(false), 400);
+                    return 100;
+                }
+                return p + 3;
+            });
+        }, 45);
+        return () => clearInterval(timer);
+    }, []);
 
-  const [ResponseSection, setResponseSection] = useState("Desktop-section")
+    // ── Lenis smooth scroll ─────────────────────────────────────────────────
+    useEffect(() => {
+        if (loader) return;
 
+        const lenis = new Lenis({
+            duration: 1.4,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+        });
+        lenisRef.current = lenis;
 
-  const [settingcolor, setSettingColor] = useState(false);
+        // Integrate Lenis with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
 
+        return () => {
+            lenis.destroy();
+            gsap.ticker.remove((time) => { lenis.raf(time * 1000); });
+        };
+    }, [loader]);
 
-  const [Username, setUserName] = useState("/")
+    // ── Active section detection ─────────────────────────────────────────────
+    useEffect(() => {
+        const onScroll = () => {
+            setScrolled(window.scrollY > 60);
+            NAV_ITEMS.forEach(s => {
+                const el = document.getElementById(s.id);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= 120 && rect.bottom >= 120) setActiveSection(s.id);
+                }
+            });
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
-  // const ThemeLoader = () => {
-  //   return localStorage.getItem("loader") ? JSON.parse(localStorage.getItem("loader")) : true
-  // }
-  const [loader, setLoader] = useState(true);
-
-  const ThemeColor = () => {
-    return JSON.parse(localStorage.getItem("theme"))
-  }
-  const [theme, setTheme] = useState(ThemeColor());
-  const colors = ["#F59213", "#23BDEE", "#D8587E", "#ba68c8", "#33EFA0", "#5B72EE"];
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state?.colors);
-  useEffect(() => {
-    localStorage.setItem("theme", theme)
-
-  }, [state, theme, Username])
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-
-
-  }, [loader, settingcolor])
-
-  const handleChnageColor = () => {
-    setTheme(!theme);
-  }
-
-  const changeSettingColor = () => {
-    setSettingColor(!settingcolor)
-  }
-  const handleChange = (name) => {
-    dispatch(ColorChangection(name))
-  }
-
-  const [scrollTop, setScrollTop] = useState(0);
-
-
-
-
-
-  const iconsData = [
-    {
-      id: 1,
-      name: "Home",
-      icon: <i class="fa-solid fa-house "></i>,
-      path: "/",
-      heightScroll: 0,
-      ToolName: "Home"
-
-    },
-    {
-      id: 2,
-      name: "About Us",
-      icon: <i class="fa-solid fa-user"></i>,
-      path: "/aboutus",
-      heightScroll: 703,
-      ToolName: "About Us"
-
-
-
-    },
-    {
-      id: 6,
-      name: "Services",
-      icon: <i class="fa-solid fa-hammer"></i>,
-      path: "/tools",
-      heightScroll: 0,
-      ToolName: "Services"
-
-
-    },
-    {
-      id: 5,
-      name: "Projects",
-      icon: <i class="fa-solid fa-user-graduate"></i>,
-      path: "/projects",
-      heightScroll: 0,
-      ToolName: "Projects"
-
-    },
-
-    {
-      id: 7,
-      name: "Contact Us",
-      icon: <i class="fa-solid fa-phone-volume"></i>,
-      path: "/contact",
-      heightScroll: 0,
-      ToolName: "Contact Us"
-
-
-    }
-  ]
-
-  useEffect(() => {
-    const handleScroll = event => {
-      setScrollTop(Math.round(window.scrollY));
+    const scrollTo = (id) => {
+        if (lenisRef.current) {
+            const el = document.getElementById(id);
+            if (el) lenisRef.current.scrollTo(el, { offset: -80, duration: 1.6 });
+        } else {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
+        setMenuOpen(false);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // ── Navbar entrance animation ────────────────────────────────────────────
+    useEffect(() => {
+        if (loader) return;
+        gsap.from('.topnav', {
+            y: -80, opacity: 0, duration: 1.2, ease: 'power4.out', delay: 0.3,
+        });
+    }, [loader]);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [scrollTop, ResponseSection]);
-
-
-  const navigate = useNavigate();
-
-
-
-
-
-
-
-  return (
-    <>
-
-      {loader ? 
-      <div className='main-loader'>
-        <div className="loading-cont">
-          <div className="cont">
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      </div> : <>
-        <div className={theme ? "theme--dark" : "theme--light"}>
-          {/* <AnimatedCursor
-            innerSize={10}
-            outerSize={30}
-            color='255, 46, 99'
-            outerAlpha={0.4}
-            innerScale={0.6}
-            outerScale={0}
-            className="mouse-section"
-          /> */}
-          <div className={"Dektop-section "}>
-            <div className="main-section">
-              <div className='middle-header'>
-                <div className='list-names'>
-
-                  {iconsData?.map((item, index) => {
-                    return (
-                      <div key={index} className={Username == item?.path ? "activename" : "inactivename"}
-                        onClick={() => {
-                          setUserName(item?.path)
-                          navigate(item?.path)
-                        }}
-                      >
-                        {Username === item?.path ? <div
-                        >
-                          <div className={'activeclass'}>
-                            <div >
-                              {item?.icon}
-                            </div>
-                            <div className='active-texts'>
-                              {item?.name}
-                            </div>
-                          </div>
-                        </div> : <>
-
-                          <div className='inactiveclass' data-tooltip-id={item?.ToolName}>
-                            {item?.icon}
-                          </div>
-                          <ReactTooltip
-                            id={item?.ToolName}
-                            place="left"
-                            content={item?.ToolName}
-                            className='vigneshwar'
-                          /></>
-                        }
-                      </div>
-                    )
-                  })}
-
-                  <div className='theme-button' onClick={handleChnageColor}>
-                    {theme ? <div className='light-theme'><i class="fa-solid fa-cloud-moon"></i></div> : <div className='dark-theme'>
-                      <i class="fa-solid fa-sun suns"></i>
-                    </div>}
-                  </div>
-
+    if (loader) {
+        return (
+            <div className="loader-screen">
+                <div className="loader-content">
+                    <div className="loader-logo">
+                        <span className="loader-v">V</span>
+                        <span className="loader-name">igneshwar</span>
+                    </div>
+                    <div className="loader-tagline">Full Stack · AI Engineer</div>
+                    <div className="loader-bar-track">
+                        <div className="loader-bar-fill" style={{ width: `${progress}%` }} />
+                    </div>
+                    <div className="loader-percent">{progress}%</div>
                 </div>
-              </div>
-              <div className='setting-color' onClick={changeSettingColor}>
-
-                <div className='setcolor'>
-                  <i class="fa-solid fa-gear "></i>
-                </div>
-
-                {settingcolor ?
-                  <div className='box-setting-colors row align-items-center justify-content-center'>
-                    {colors?.map((item, index) => {
-                      return (
-                        <div key={index} className='col-lg-3 col-xs-3 col-sm-6 mb-1 mt-1 box-color' onClick={() => {
-                          handleChange(item)
-                          setSettingColor(false);
-                        }}>
-                          <div
-                            className='color-box-shadow'
-                            style={{
-                              backgroundColor: item
-                            }}
-                          >
-
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div> : null}
-              </div>
-
-              <div className='body-sections'>
-                <Routes>
-                  <Route exact path="/" element={<Home colorName={state?.ColorName} ResponseSection={ResponseSection} theme={theme} />} />
-                  <Route path="/aboutus" element={<Aboutus colorName={state?.ColorName} />} />
-                  <Route path="/projects" element={<Projects colorName={state?.ColorName} />} />
-                  <Route path="/tools" element={<WorkingTools colorName={state?.ColorName} />} />
-                  <Route path="/contact" element={<Contact colorName={state?.ColorName} />} />
-                </Routes>
-              </div>
+                <div className="loader-orb loader-orb--1" />
+                <div className="loader-orb loader-orb--2" />
+                <div className="loader-orb loader-orb--3" />
             </div>
-          </div>
+        );
+    }
 
+    return (
+        <div className="portfolio-app">
+            <Cursor />
+
+            {/* ── Top nav ── */}
+            <nav className={`topnav${scrolled ? ' topnav--scrolled' : ''}`}>
+                <div className="topnav__brand" onClick={() => scrollTo('home')}>
+                    <span className="brand-v">V</span>igneshwar<span className="brand-dot">.</span>
+                </div>
+
+                <div className={`topnav__links${menuOpen ? ' topnav__links--open' : ''}`}>
+                    {NAV_ITEMS.map(n => (
+                        <button
+                            key={n.id}
+                            className={`nav-pill${activeSection === n.id ? ' nav-pill--active' : ''}`}
+                            onClick={() => scrollTo(n.id)}
+                        >
+                            {n.label}
+                            {activeSection === n.id && <span className="nav-pill__dot" />}
+                        </button>
+                    ))}
+                </div>
+
+                <a href="mailto:vikyhari321@gmail.com" className="hire-cta">
+                    <span>Hire Me</span>
+                    <i className="fa-solid fa-arrow-right" />
+                </a>
+
+                <button
+                    className={`menu-toggle${menuOpen ? ' menu-toggle--open' : ''}`}
+                    onClick={() => setMenuOpen(m => !m)}
+                    aria-label="Toggle menu"
+                >
+                    <span /><span /><span />
+                </button>
+            </nav>
+
+            {/* ── Sections ── */}
+            <section id="home"><Home scrollTo={scrollTo} /></section>
+
+            <Marquee />
+
+            <section id="about"><Aboutus /></section>
+
+            <Marquee reverse />
+
+            <section id="projects"><Projects /></section>
+            <section id="tools"><WorkingTools /></section>
+            <section id="contact"><Contact /></section>
+
+            <Footer scrollTo={scrollTo} />
         </div>
-      </>}
-
-
-    </>
-  );
+    );
 }
+
 export default App;

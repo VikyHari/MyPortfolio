@@ -1,47 +1,62 @@
 export const ProjectDatas = [
-
     {
         id: 1,
-        name: "Learning Management System (LMS)",
-        des: "React.js, JavaScript, HTML and Sass, Bootstrap, Responsive Web Design, Create the necessary components, such as headers, sections, and footers, using React components.",
-        button: "Live Demo",
-        url: 'http://edu.cdp360.org/'
-
+        name: "Local RAG System (AI Pipeline)",
+        des: "Built a fully local RAG system using Ollama (Gemma) and ChromaDB that processes PDFs, performs semantic search via vector embeddings, and generates context-aware responses — zero external API dependency.",
+        tags: ["Ollama", "ChromaDB", "RAG", "LLMOps", "Python", "Vector Embeddings"],
+        button: "GitHub",
+        url: 'https://github.com/VikyHari',
+        accent: "purple",
+        icon: "fa-solid fa-brain",
     },
     {
         id: 2,
-        name: "NEET/JEE (Landing Page)",
-        des: "React.js, JavaScript, HTML and Sass, Bootstrap, Responsive Web Design, Create the necessary components, such as headers, sections, and footers, using React components.",
+        name: "Learning Management System (LMS)",
+        des: "Full-featured LMS web app with React.js, dynamic course management, responsive UI, and real-time student progress tracking. Deployed at scale for CDP360.",
+        tags: ["React.js", "JavaScript", "SASS", "Bootstrap", "REST APIs"],
         button: "Live Demo",
-        url: 'https://neetjeecoaching.cdp360.org/'
+        url: 'http://edu.cdp360.org/',
+        accent: "cyan",
+        icon: "fa-solid fa-graduation-cap",
     },
     {
-        id:3,
-        name:"CDP360 (Landing page)",
-        des: "HTML, CSS, Bootstrap, Responsive Web Design,  Create the necessary components, such as headers, sections, and footers, using HTML components",
+        id: 3,
+        name: "NEET/JEE Coaching Platform",
+        des: "Landing page and platform for India's competitive exam coaching (NEET/JEE) — built with React.js, animated UI, optimized for mobile, and live at scale.",
+        tags: ["React.js", "JavaScript", "SASS", "Responsive Design"],
         button: "Live Demo",
-        url: 'https://cdp360.org/'
+        url: 'https://neetjeecoaching.cdp360.org/',
+        accent: "pink",
+        icon: "fa-solid fa-atom",
     },
     {
-        id:4,
-        name:"Learning Management System with NEET/JEE (Android app)",
-        des: "React Native,  Responsive design, Create necessary components, using react components, NEET/JEE mock test implementation,  ",
+        id: 4,
+        name: "CDP360 Corporate Website",
+        des: "Corporate landing page for CDP360 built with HTML/CSS/Bootstrap. Clean, fast-loading, fully responsive design with modern sections and smooth animations.",
+        tags: ["HTML", "CSS", "Bootstrap", "Responsive Design"],
         button: "Live Demo",
-        url: 'https://play.google.com/store/apps/details?id=com.cdp360.app&hl=en'
+        url: 'https://cdp360.org/',
+        accent: "green",
+        icon: "fa-solid fa-globe",
     },
     {
-        id:5,
-        name:"Nodejs Contact Tutorial",
-        des: "Create a contact app using Node.js by setting up Express for routing, MongoDB for data storage, and implementing CRUD operations for managing contacts.",
-        button: "Git Code",
-        url: 'https://github.com/VikyHari/nodejs-contact-Backend'
+        id: 5,
+        name: "LMS Android App",
+        des: "Mobile companion to the LMS platform — built with React Native. Includes NEET/JEE mock tests, course access, and responsive design across Android devices.",
+        tags: ["React Native", "JavaScript", "Mobile UI", "Android"],
+        button: "Play Store",
+        url: 'https://play.google.com/store/apps/details?id=com.cdp360.app&hl=en',
+        accent: "purple",
+        icon: "fa-brands fa-android",
     },
     {
-        id:6,
-        name:"PortFolio",
-        des: "Build a portfolio in React with interactive components, routing, and dynamic project displays.",
-        button: "Git Code",
-        url: 'https://github.com/VikyHari/MyPortfolio'
-    }
-
+        id: 6,
+        name: "Node.js REST API (Contacts)",
+        des: "Backend REST API for contact management built with Node.js and Express. Full CRUD operations, MongoDB storage, route validation, and clean API design.",
+        tags: ["Node.js", "Express", "MongoDB", "REST API", "CRUD"],
+        button: "GitHub",
+        url: 'https://github.com/VikyHari/nodejs-contact-Backend',
+        accent: "cyan",
+        icon: "fa-brands fa-node-js",
+    },
 ]
