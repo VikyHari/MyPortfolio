@@ -15,6 +15,7 @@ import WorkingTools from './component/workingtools/WorkingTools';
 import Contact      from './component/contact/Contact';
 import Footer       from './component/footer/Footer';
 import Marquee      from './component/ui/Marquee';
+import TechStack    from './component/ui/TechStack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -168,6 +169,7 @@ function App() {
             {/* ── Page sections ── */}
             <section id="home"><Home scrollTo={scrollTo} /></section>
             <Marquee />
+            <TechStack />
             <section id="about"><Aboutus /></section>
             <Marquee reverse />
             <section id="projects"><Projects /></section>
