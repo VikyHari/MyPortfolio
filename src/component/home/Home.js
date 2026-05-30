@@ -158,17 +158,40 @@ function Home({ scrollTo }) {
         };
         window.addEventListener('mousemove', onMouse);
 
-        // Gyroscope parallax on mobile
+        // ── Gyroscope parallax (mobile) ───────────────────────────────────────
         const onOrientation = (e) => {
             if (window.innerWidth > 768) return;
-            const gamma = Math.max(-45, Math.min(45, e.gamma || 0)); // left-right
-            const beta  = Math.max(-45, Math.min(45, (e.beta || 0) - 30)); // front-back
+            const gamma = Math.max(-45, Math.min(45, e.gamma || 0));
+            const beta  = Math.max(-45, Math.min(45, (e.beta  || 0) - 30));
             mx = (gamma / 45) * 1.2;
             my = -(beta  / 45) * 0.8;
         };
-        window.addEventListener('deviceorientation', onOrientation, { passive: true });
 
-        // Touch swipe drag on mobile for parallax
+        const startGyro = () => {
+            // iOS 13+ requires explicit permission from a user gesture
+            if (
+                typeof DeviceOrientationEvent !== 'undefined' &&
+                typeof DeviceOrientationEvent.requestPermission === 'function'
+            ) {
+                DeviceOrientationEvent.requestPermission()
+                    .then(state => {
+                        if (state === 'granted') {
+                            window.addEventListener('deviceorientation', onOrientation, { passive: true });
+                        }
+                    })
+                    .catch(() => {});
+            } else {
+                // Android + older iOS — no permission needed
+                window.addEventListener('deviceorientation', onOrientation, { passive: true });
+            }
+        };
+
+        // Trigger gyro on first user touch (needed for iOS permission dialog)
+        if (window.innerWidth <= 768) {
+            window.addEventListener('touchstart', startGyro, { once: true, passive: true });
+        }
+
+        // ── Touch drag fallback for parallax ──────────────────────────────────
         let touchStartX = 0, touchStartY = 0;
         const onTouchStart = (e) => {
             touchStartX = e.touches[0].clientX;
@@ -178,8 +201,8 @@ function Home({ scrollTo }) {
             if (window.innerWidth > 768) return;
             const dx = (e.touches[0].clientX - touchStartX) / window.innerWidth  * 2;
             const dy = (e.touches[0].clientY - touchStartY) / window.innerHeight * -2;
-            mx += dx * 0.15;
-            my += dy * 0.15;
+            mx += dx * 0.12;
+            my += dy * 0.12;
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
         };
@@ -226,6 +249,7 @@ function Home({ scrollTo }) {
             cancelAnimationFrame(raf);
             window.removeEventListener('mousemove', onMouse);
             window.removeEventListener('deviceorientation', onOrientation);
+            window.removeEventListener('touchstart', startGyro);
             window.removeEventListener('resize', onResize);
             [galaxyGeo, g2Geo, starGeo, galaxyMat, g2Mat, starMat, tex].forEach(o => o.dispose?.());
             renderer.dispose();
