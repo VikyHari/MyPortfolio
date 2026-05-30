@@ -374,9 +374,9 @@ function Home({ scrollTo }) {
 
                     <div className="hero__stats">
                         {[
-                            { icon: 'fa-solid fa-briefcase', num: '2+', label: 'Years Exp.' },
-                            { icon: 'fa-solid fa-folder-open', num: '6+', label: 'Projects', cls: 'stat-card--cyan' },
-                            { icon: 'fa-solid fa-brain', num: '1+', label: 'AI Systems', cls: 'stat-card--pink' },
+                            { icon: 'fa-solid fa-briefcase',   num: '3+',  label: 'Years Exp.' },
+                            { icon: 'fa-solid fa-folder-open', num: '20+', label: 'Projects',  cls: 'stat-card--cyan' },
+                            { icon: 'fa-solid fa-brain',       num: '2+',  label: 'AI Systems', cls: 'stat-card--pink' },
                         ].map((s, i) => (
                             <div key={i} className={`stat-card ${s.cls || ''}`}>
                                 <i className={`${s.icon} stat-icon`} />
