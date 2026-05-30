@@ -2,7 +2,7 @@ export const PersonalContent = {
     name: "Vigneshwar H",
     phoneno: "+91 9344556276",
     emailid: "vikyhari321@gmail.com",
-    dob: "Born on 12 June, 2000",
+    dob: "Born on 12 February, 2000",
     deggre: "Bachelor Of Engineering (CSE)",
     address: "Chennai, India",
     role: "Full Stack Developer & AI Engineer",
