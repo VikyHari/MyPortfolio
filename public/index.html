@@ -2,14 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+
+    <!-- Force HTTPS on all requests -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
+    <!-- Favicon — canvas generated, bypasses cache -->
     <link rel="icon" id="dynamic-favicon" type="image/png" />
     <script>
       (function () {
         var c = document.createElement('canvas');
         c.width = 64; c.height = 64;
         var ctx = c.getContext('2d');
-
-        // Rounded rect helper
         function rr(x, y, w, h, r) {
           ctx.beginPath();
           ctx.moveTo(x + r, y);
@@ -23,67 +26,46 @@
           ctx.quadraticCurveTo(x, y, x + r, y);
           ctx.closePath();
         }
-
-        // Dark background
         var bg = ctx.createLinearGradient(0, 0, 64, 64);
-        bg.addColorStop(0, '#0c0c1e');
-        bg.addColorStop(1, '#1a1040');
-        rr(0, 0, 64, 64, 14);
-        ctx.fillStyle = bg;
-        ctx.fill();
-
-        // Subtle border
+        bg.addColorStop(0, '#0c0c1e'); bg.addColorStop(1, '#1a1040');
+        rr(0, 0, 64, 64, 14); ctx.fillStyle = bg; ctx.fill();
         var bd = ctx.createLinearGradient(0, 0, 64, 64);
-        bd.addColorStop(0, 'rgba(139,92,246,0.7)');
-        bd.addColorStop(1, 'rgba(34,211,238,0.7)');
-        rr(1.5, 1.5, 61, 61, 13);
-        ctx.strokeStyle = bd;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        // VH text with gradient
+        bd.addColorStop(0, 'rgba(139,92,246,0.7)'); bd.addColorStop(1, 'rgba(34,211,238,0.7)');
+        rr(1.5, 1.5, 61, 61, 13); ctx.strokeStyle = bd; ctx.lineWidth = 1.5; ctx.stroke();
         var tg = ctx.createLinearGradient(6, 20, 58, 50);
-        tg.addColorStop(0,   '#8b5cf6');
-        tg.addColorStop(0.5, '#a78bfa');
-        tg.addColorStop(1,   '#22d3ee');
+        tg.addColorStop(0, '#8b5cf6'); tg.addColorStop(0.5, '#a78bfa'); tg.addColorStop(1, '#22d3ee');
         ctx.fillStyle = tg;
         ctx.font = '800 30px "Inter","Poppins",Arial,sans-serif';
         ctx.textBaseline = 'middle';
         ctx.fillText('VH', 7, 34);
-
-        // Pink dot accent
         ctx.fillStyle = '#f472b6';
-        ctx.beginPath();
-        ctx.arc(56, 50, 3.5, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Apply
-        var link = document.getElementById('dynamic-favicon');
-        link.href = c.toDataURL('image/png');
+        ctx.beginPath(); ctx.arc(56, 50, 3.5, 0, Math.PI * 2); ctx.fill();
+        document.getElementById('dynamic-favicon').href = c.toDataURL('image/png');
       })();
     </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#060614" />
     <meta name="description" content="Vigneshwar H — Full Stack Developer &amp; AI Engineer. React.js, LLMOps, RAG Pipelines, Agentic AI." />
+    <meta name="author" content="Vigneshwar H" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Vigneshwar H — Full Stack & AI Engineer" />
+    <meta property="og:description" content="Full Stack Developer specializing in React.js, LLMOps, RAG Pipelines, and Agentic AI systems." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vignesh-portfolio-ten.vercel.app/" />
+
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-
-    <!-- aos link -->
-
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <title>Vigneshwar H — Full Stack & AI Engineer</title>
-
-    <!-- script tags aos -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
