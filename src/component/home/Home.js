@@ -150,13 +150,41 @@ function Home({ scrollTo }) {
         });
         scene.add(new THREE.Mesh(nebulaGeo, nebulaMat));
 
-        // ── Mouse ─────────────────────────────────────────────────────────────
+        // ── Mouse (desktop) + Gyroscope (mobile) ──────────────────────────────
         let mx = 0, my = 0;
         const onMouse = (e) => {
             mx = (e.clientX / window.innerWidth  - 0.5) * 2;
             my = (e.clientY / window.innerHeight - 0.5) * -2;
         };
         window.addEventListener('mousemove', onMouse);
+
+        // Gyroscope parallax on mobile
+        const onOrientation = (e) => {
+            if (window.innerWidth > 768) return;
+            const gamma = Math.max(-45, Math.min(45, e.gamma || 0)); // left-right
+            const beta  = Math.max(-45, Math.min(45, (e.beta || 0) - 30)); // front-back
+            mx = (gamma / 45) * 1.2;
+            my = -(beta  / 45) * 0.8;
+        };
+        window.addEventListener('deviceorientation', onOrientation, { passive: true });
+
+        // Touch swipe drag on mobile for parallax
+        let touchStartX = 0, touchStartY = 0;
+        const onTouchStart = (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        };
+        const onTouchMove = (e) => {
+            if (window.innerWidth > 768) return;
+            const dx = (e.touches[0].clientX - touchStartX) / window.innerWidth  * 2;
+            const dy = (e.touches[0].clientY - touchStartY) / window.innerHeight * -2;
+            mx += dx * 0.15;
+            my += dy * 0.15;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        };
+        canvas.addEventListener('touchstart', onTouchStart, { passive: true });
+        canvas.addEventListener('touchmove',  onTouchMove,  { passive: true });
 
         const onResize = () => {
             renderer.setSize(W(), H());
@@ -197,6 +225,7 @@ function Home({ scrollTo }) {
         return () => {
             cancelAnimationFrame(raf);
             window.removeEventListener('mousemove', onMouse);
+            window.removeEventListener('deviceorientation', onOrientation);
             window.removeEventListener('resize', onResize);
             [galaxyGeo, g2Geo, starGeo, galaxyMat, g2Mat, starMat, tex].forEach(o => o.dispose?.());
             renderer.dispose();

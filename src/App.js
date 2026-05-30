@@ -3,32 +3,37 @@ import './App.scss';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import Cursor from './component/cursor/Cursor';
-import Home from './component/home/Home';
-import Aboutus from './component/aboutus/Aboutus';
-import Projects from './component/projects/Projects';
+import Cursor      from './component/cursor/Cursor';
+import MobileNav   from './component/mobile/MobileNav';
+import TouchRipple from './component/mobile/TouchRipple';
+import ScrollProgress from './component/mobile/ScrollProgress';
+import FloatingCTA from './component/mobile/FloatingCTA';
+import Home         from './component/home/Home';
+import Aboutus      from './component/aboutus/Aboutus';
+import Projects     from './component/projects/Projects';
 import WorkingTools from './component/workingtools/WorkingTools';
-import Contact from './component/contact/Contact';
-import Footer from './component/footer/Footer';
-import Marquee from './component/ui/Marquee';
+import Contact      from './component/contact/Contact';
+import Footer       from './component/footer/Footer';
+import Marquee      from './component/ui/Marquee';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const NAV_ITEMS = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
+    { id: 'home',     label: 'Home'     },
+    { id: 'about',    label: 'About'    },
     { id: 'projects', label: 'Projects' },
-    { id: 'tools', label: 'Services' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'tools',    label: 'Services' },
+    { id: 'contact',  label: 'Contact'  },
 ];
 
 function App() {
     const [activeSection, setActiveSection] = useState('home');
-    const [scrolled, setScrolled] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [loader, setLoader] = useState(true);
-    const [progress, setProgress] = useState(0);
+    const [scrolled,  setScrolled]  = useState(false);
+    const [menuOpen,  setMenuOpen]  = useState(false);
+    const [loader,    setLoader]    = useState(true);
+    const [progress,  setProgress]  = useState(0);
     const lenisRef = useRef(null);
+    const isMobile = window.innerWidth <= 768;
 
     // ── Loader ──────────────────────────────────────────────────────────────
     useEffect(() => {
@@ -48,22 +53,19 @@ function App() {
     // ── Lenis smooth scroll ─────────────────────────────────────────────────
     useEffect(() => {
         if (loader) return;
-
         const lenis = new Lenis({
-            duration: 1.4,
+            duration: isMobile ? 1.0 : 1.4,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
+            touchMultiplier: isMobile ? 1.5 : 1,
         });
         lenisRef.current = lenis;
-
-        // Integrate Lenis with GSAP ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add((time) => { lenis.raf(time * 1000); });
         gsap.ticker.lagSmoothing(0);
-
+        setTimeout(() => ScrollTrigger.refresh(), 200);
         return () => {
             lenis.destroy();
-            gsap.ticker.remove((time) => { lenis.raf(time * 1000); });
         };
     }, [loader]);
 
@@ -86,19 +88,17 @@ function App() {
     const scrollTo = (id) => {
         if (lenisRef.current) {
             const el = document.getElementById(id);
-            if (el) lenisRef.current.scrollTo(el, { offset: -80, duration: 1.6 });
+            if (el) lenisRef.current.scrollTo(el, { offset: -80, duration: 1.4 });
         } else {
             document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
         }
         setMenuOpen(false);
     };
 
-    // ── Navbar entrance animation ────────────────────────────────────────────
+    // ── Navbar entrance ──────────────────────────────────────────────────────
     useEffect(() => {
         if (loader) return;
-        gsap.from('.topnav', {
-            y: -80, opacity: 0, duration: 1.2, ease: 'power4.out', delay: 0.3,
-        });
+        gsap.from('.topnav', { y: -80, opacity: 0, duration: 1.2, ease: 'power4.out', delay: 0.3 });
     }, [loader]);
 
     if (loader) {
@@ -124,9 +124,13 @@ function App() {
 
     return (
         <div className="portfolio-app">
+            {/* ── Global interaction layer ── */}
             <Cursor />
+            <TouchRipple />
+            <ScrollProgress />
+            <FloatingCTA />
 
-            {/* ── Top nav ── */}
+            {/* ── Top nav (desktop + mobile hamburger) ── */}
             <nav className={`topnav${scrolled ? ' topnav--scrolled' : ''}`}>
                 <div className="topnav__brand" onClick={() => scrollTo('home')}>
                     <span className="brand-v">V</span>igneshwar<span className="brand-dot">.</span>
@@ -159,20 +163,18 @@ function App() {
                 </button>
             </nav>
 
-            {/* ── Sections ── */}
+            {/* ── Page sections ── */}
             <section id="home"><Home scrollTo={scrollTo} /></section>
-
             <Marquee />
-
             <section id="about"><Aboutus /></section>
-
             <Marquee reverse />
-
             <section id="projects"><Projects /></section>
             <section id="tools"><WorkingTools /></section>
             <section id="contact"><Contact /></section>
-
             <Footer scrollTo={scrollTo} />
+
+            {/* ── Mobile bottom nav (only on mobile) ── */}
+            <MobileNav scrollTo={scrollTo} activeSection={activeSection} />
         </div>
     );
 }

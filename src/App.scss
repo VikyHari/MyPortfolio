@@ -351,6 +351,67 @@ section {
   background-clip: text;
 }
 
+// ─── Mobile global tweaks ────────────────────────────────────────────────────
+@media (max-width: 768px) {
+    // ── Tap feedback ──────────────────────────────────────────────────────────
+    a, button, [role="button"] {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
+    .btn-primary:active,
+    .btn-secondary:active,
+    .social-icon:active,
+    .project-cta:active,
+    .download-btn:active,
+    .form-submit:active,
+    .c-social:active {
+        transform: scale(0.93) !important;
+        transition: transform 0.1s ease !important;
+    }
+
+    .project-card:active,
+    .service-card:active,
+    .info-card:active,
+    .stat-card:active,
+    .exp-card:active,
+    .dev-tool:active,
+    .ai-tool:active {
+        transform: scale(0.97);
+        transition: transform 0.12s ease;
+    }
+
+    // ── Header: always visible with solid glass bg ────────────────────────────
+    .topnav {
+        background: rgba(6, 6, 20, 0.96) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+        padding: 14px 20px !important;
+    }
+
+    // Hide desktop nav links + hire CTA (replaced by bottom nav)
+    .topnav__links { display: none !important; }
+    .topnav__links--open {
+        display: flex !important;
+        position: fixed;
+        inset: 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        background: rgba(6, 6, 20, 0.98);
+        backdrop-filter: blur(24px);
+        z-index: 999;
+    }
+    .hire-cta { display: none !important; }
+
+    // Section scroll offset
+    section { scroll-margin-top: 60px; }
+
+    body { -webkit-text-size-adjust: 100%; }
+}
+
 // ─── SplitText global styles ──────────────────────────────────────────────────
 .split-text { display: block; }
 .sw-wrap {
