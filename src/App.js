@@ -33,7 +33,6 @@ function App() {
     const [loader,    setLoader]    = useState(true);
     const [progress,  setProgress]  = useState(0);
     const lenisRef = useRef(null);
-    const isMobile = window.innerWidth <= 768;
 
     // ── Loader ──────────────────────────────────────────────────────────────
     useEffect(() => {
@@ -53,11 +52,12 @@ function App() {
     // ── Lenis smooth scroll ─────────────────────────────────────────────────
     useEffect(() => {
         if (loader) return;
+        const mobile = window.innerWidth <= 768;
         const lenis = new Lenis({
-            duration: isMobile ? 1.0 : 1.4,
+            duration: mobile ? 1.0 : 1.4,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
-            touchMultiplier: isMobile ? 1.5 : 1,
+            touchMultiplier: mobile ? 1.5 : 1,
         });
         lenisRef.current = lenis;
         lenis.on('scroll', ScrollTrigger.update);
