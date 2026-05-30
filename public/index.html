@@ -2,8 +2,66 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" id="dynamic-favicon" type="image/png" />
+    <script>
+      (function () {
+        var c = document.createElement('canvas');
+        c.width = 64; c.height = 64;
+        var ctx = c.getContext('2d');
+
+        // Rounded rect helper
+        function rr(x, y, w, h, r) {
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.lineTo(x + w - r, y);
+          ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+          ctx.lineTo(x + w, y + h - r);
+          ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+          ctx.lineTo(x + r, y + h);
+          ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+          ctx.lineTo(x, y + r);
+          ctx.quadraticCurveTo(x, y, x + r, y);
+          ctx.closePath();
+        }
+
+        // Dark background
+        var bg = ctx.createLinearGradient(0, 0, 64, 64);
+        bg.addColorStop(0, '#0c0c1e');
+        bg.addColorStop(1, '#1a1040');
+        rr(0, 0, 64, 64, 14);
+        ctx.fillStyle = bg;
+        ctx.fill();
+
+        // Subtle border
+        var bd = ctx.createLinearGradient(0, 0, 64, 64);
+        bd.addColorStop(0, 'rgba(139,92,246,0.7)');
+        bd.addColorStop(1, 'rgba(34,211,238,0.7)');
+        rr(1.5, 1.5, 61, 61, 13);
+        ctx.strokeStyle = bd;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // VH text with gradient
+        var tg = ctx.createLinearGradient(6, 20, 58, 50);
+        tg.addColorStop(0,   '#8b5cf6');
+        tg.addColorStop(0.5, '#a78bfa');
+        tg.addColorStop(1,   '#22d3ee');
+        ctx.fillStyle = tg;
+        ctx.font = '800 30px "Inter","Poppins",Arial,sans-serif';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('VH', 7, 34);
+
+        // Pink dot accent
+        ctx.fillStyle = '#f472b6';
+        ctx.beginPath();
+        ctx.arc(56, 50, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Apply
+        var link = document.getElementById('dynamic-favicon');
+        link.href = c.toDataURL('image/png');
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#060614" />
     <meta name="description" content="Vigneshwar H — Full Stack Developer &amp; AI Engineer. React.js, LLMOps, RAG Pipelines, Agentic AI." />
