@@ -61,10 +61,12 @@ function App() {
         });
         lenisRef.current = lenis;
         lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        const tickerFn = (time) => { lenis.raf(time * 1000); };
+        gsap.ticker.add(tickerFn);
         gsap.ticker.lagSmoothing(0);
         setTimeout(() => ScrollTrigger.refresh(), 200);
         return () => {
+            gsap.ticker.remove(tickerFn);
             lenis.destroy();
         };
     }, [loader]);
