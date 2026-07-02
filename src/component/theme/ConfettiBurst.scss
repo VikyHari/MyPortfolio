@@ -1,0 +1,24 @@
+.confetti-burst {
+    position: fixed;
+    inset: 0;
+    z-index: 9000; // above all page content/chatbot(4000), below the cursor overlay
+    overflow: hidden;
+    pointer-events: none;
+
+    &__piece {
+        position: absolute;
+        top: -12px;
+        width: 8px;
+        height: 14px;
+        border-radius: 2px;
+        opacity: 0.9;
+        animation-name: confettiFall;
+        animation-timing-function: cubic-bezier(0.4, 0.1, 0.6, 0.9);
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}

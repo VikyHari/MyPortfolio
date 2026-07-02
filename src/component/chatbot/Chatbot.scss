@@ -97,6 +97,44 @@
     color: var(--text-dim);
 }
 
+.chatbot__headerActions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.chatbot__reset {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    background: var(--glass-md);
+    color: var(--text-dim);
+    font-size: 0.68rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
+
+    i {
+        font-size: 0.68rem;
+    }
+
+    &:hover {
+        background: var(--glass-hover);
+        color: var(--text);
+        border-color: var(--glass-border-hover);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 2px;
+    }
+}
+
 .chatbot__close {
     display: flex;
     align-items: center;

@@ -5,6 +5,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import * as THREE from 'three';
 import { Typewriter } from 'react-simple-typewriter';
 import MagneticBtn from '../ui/MagneticBtn';
+import { useOverrideText } from '../../theme/OverridesContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,6 +65,7 @@ function buildGalaxy(count = 80000, radius = 10, branches = 3, spin = 1.0, rando
 function Home({ scrollTo }) {
     const canvasRef = useRef(null);
     const heroRef   = useRef(null);
+    const bioOverride = useOverrideText('home.bio', null);
 
     // ── Three.js galaxy scene (mobile-safe) ─────────────────────────────────
     useEffect(() => {
@@ -302,17 +304,17 @@ function Home({ scrollTo }) {
                 <div className="hero__left">
                     <div className="hero__badge">
                         <span className="badge-dot" />
-                        Available for opportunities
+                        {useOverrideText('home.badge', 'Available for opportunities')}
                     </div>
 
-                    <div className="hero__greeting">Hello, I'm</div>
+                    <div className="hero__greeting">{useOverrideText('home.greeting', "Hello, I'm")}</div>
 
                     <h1 className="hero__name">
                         <div className="hero-name-clip">
                             <div className="hero-title-line hero-title-line--main">Vigneshwar H.</div>
                         </div>
                         <div className="hero-name-clip hero-name-clip--sub">
-                            <div className="hero-title-line hero-title-line--sub">Full Stack · AI Engineer</div>
+                            <div className="hero-title-line hero-title-line--sub">{useOverrideText('home.tagline', 'Full Stack · AI Engineer')}</div>
                         </div>
                     </h1>
 
@@ -326,10 +328,14 @@ function Home({ scrollTo }) {
                     </div>
 
                     <p className="hero__bio">
-                        Building scalable web apps and integrating AI into real-world products.
-                        Specializing in <span className="bio-highlight">RAG pipelines</span>,{' '}
-                        <span className="bio-highlight">LLMOps</span>, and{' '}
-                        <span className="bio-highlight">Agentic AI</span>.
+                        {bioOverride || (
+                            <>
+                                Building scalable web apps and integrating AI into real-world products.
+                                Specializing in <span className="bio-highlight">RAG pipelines</span>,{' '}
+                                <span className="bio-highlight">LLMOps</span>, and{' '}
+                                <span className="bio-highlight">Agentic AI</span>.
+                            </>
+                        )}
                     </p>
 
                     <div className="hero__actions">

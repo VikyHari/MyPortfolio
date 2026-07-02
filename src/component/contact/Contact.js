@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './styles/Contact.scss';
 import SplitText from '../ui/SplitText';
 import MagneticBtn from '../ui/MagneticBtn';
+import { useOverrideText } from '../../theme/OverridesContext';
 
 const CONTACT_INFO = [
     { icon: 'fa-solid fa-map-location-dot', label: 'Location', value: 'Chennai, India',        color: 'var(--purple)' },
@@ -64,8 +65,8 @@ function Contact() {
 
             <div className="contact-inner">
                 <div className="section-header">
-                    <div className="section-label rv">Contact</div>
-                    <SplitText tag="h2" className="section-title" stagger={0.06}>Let's Work Together</SplitText>
+                    <div className="section-label rv">{useOverrideText('contact.label', 'Contact')}</div>
+                    <SplitText tag="h2" className="section-title" stagger={0.06}>{useOverrideText('contact.title', "Let's Work Together")}</SplitText>
                     <p className="section-subtitle rv">Open to Full Stack and AI-enabled engineering roles. Let's build something great.</p>
                 </div>
 

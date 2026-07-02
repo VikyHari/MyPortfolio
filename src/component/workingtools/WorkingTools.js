@@ -9,6 +9,7 @@ import android from '../../assests/images/android.png';
 import gitlab from '../../assests/images/gitlab.png';
 import SplitText from '../ui/SplitText';
 import MagneticBtn from '../ui/MagneticBtn';
+import { useOverrideText } from '../../theme/OverridesContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,8 +67,8 @@ function WorkingTools() {
             <div className="tools-inner">
                 {/* Header */}
                 <div className="section-header">
-                    <div className="section-label rv">Services</div>
-                    <SplitText tag="h2" className="section-title" stagger={0.06}>What I Offer</SplitText>
+                    <div className="section-label rv">{useOverrideText('tools.label', 'Services')}</div>
+                    <SplitText tag="h2" className="section-title" stagger={0.06}>{useOverrideText('tools.title', 'What I Offer')}</SplitText>
                     <p className="section-subtitle rv">
                         From scalable web applications to AI-powered pipelines —
                         I help build products where technology solves real problems.

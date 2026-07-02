@@ -3,6 +3,7 @@ import './styles/Projects.scss';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { ProjectDatas } from '../../commoncontent/ProjectData';
+import { useOverrideText } from '../../theme/OverridesContext';
 import Tilt from 'react-parallax-tilt';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, A11y } from 'swiper/modules';
@@ -51,6 +52,10 @@ function Projects() {
     const sectionRef  = useRef(null);
     const trackRef    = useRef(null);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    // Mobile-only for now: the desktop view's title is a bespoke per-letter
+    // "PROJECTS" scroll animation (see labelChars below) that isn't a plain
+    // text node, so it's intentionally left out of live-theming for now.
+    const projectsTitleOverride = useOverrideText('projects.title', null);
 
     useEffect(() => {
         const h = () => setIsMobile(window.innerWidth < 768);
@@ -150,8 +155,10 @@ function Projects() {
             {isMobile && (
                 <div className="projects-inner">
                     <div className="section-header">
-                        <div className="section-label rv">Projects</div>
-                        <h2 className="section-title rv">Things I've <span>Built</span></h2>
+                        <div className="section-label rv">{useOverrideText('projects.label', 'Projects')}</div>
+                        <h2 className="section-title rv">
+                            {projectsTitleOverride || (<>Things I've <span>Built</span></>)}
+                        </h2>
                         <p className="section-subtitle rv">Real products — shipped and running.</p>
                     </div>
                     <div className="projects-swiper-wrap rv">

@@ -17,6 +17,8 @@ import Footer       from './component/footer/Footer';
 import Marquee      from './component/ui/Marquee';
 import TechStack    from './component/ui/TechStack';
 import Chatbot      from './component/chatbot/Chatbot';
+import ConfettiBurst from './component/theme/ConfettiBurst';
+import { OverridesProvider, useSectionState, useFeature } from './theme/OverridesContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,13 +30,25 @@ const NAV_ITEMS = [
     { id: 'contact',  label: 'Contact'  },
 ];
 
-function App() {
+// Live-theming can show/hide/reorder these four — 'home' stays fixed (see
+// src/theme/manifest.js). Defined once; useSectionState() below decides
+// which ids render and in what order.
+const SECTION_COMPONENTS = {
+    about:    <Aboutus />,
+    projects: <Projects />,
+    tools:    <WorkingTools />,
+    contact:  <Contact />,
+};
+
+function PortfolioApp() {
     const [activeSection, setActiveSection] = useState('home');
     const [scrolled,  setScrolled]  = useState(false);
     const [menuOpen,  setMenuOpen]  = useState(false);
     const [loader,    setLoader]    = useState(true);
     const [progress,  setProgress]  = useState(0);
     const lenisRef = useRef(null);
+    const visibleSections = useSectionState();
+    const animatedCursorOn = useFeature('animatedCursor');
 
     // ── Loader ──────────────────────────────────────────────────────────────
     useEffect(() => {
@@ -129,10 +143,11 @@ function App() {
     return (
         <div className="portfolio-app">
             {/* ── Global interaction layer ── */}
-            <Cursor />
+            {animatedCursorOn && <Cursor />}
             <TouchRipple />
             <ScrollProgress />
             <FloatingCTA />
+            <ConfettiBurst />
             <Chatbot />
 
             {/* ── Top nav (desktop + mobile hamburger) ── */}
@@ -172,16 +187,30 @@ function App() {
             <section id="home"><Home scrollTo={scrollTo} /></section>
             <Marquee />
             <TechStack />
-            <section id="about"><Aboutus /></section>
             <Marquee reverse />
-            <section id="projects"><Projects /></section>
-            <section id="tools"><WorkingTools /></section>
-            <section id="contact"><Contact /></section>
+            {/* about/projects/tools/contact: order + visibility come from the
+                visitor's (ephemeral) overrides. With none applied this list is
+                exactly ['about','projects','tools','contact'], all visible —
+                identical to the original hardcoded markup. */}
+            {visibleSections.map((id) => (
+                <section id={id} key={id}>{SECTION_COMPONENTS[id]}</section>
+            ))}
             <Footer scrollTo={scrollTo} />
 
             {/* ── Mobile bottom nav (only on mobile) ── */}
             <MobileNav scrollTo={scrollTo} activeSection={activeSection} />
         </div>
+    );
+}
+
+// Wraps the real app in the ephemeral overrides store. Kept as a thin outer
+// component (rather than folded into PortfolioApp) because a component can't
+// consume a context it renders itself in the same pass.
+function App() {
+    return (
+        <OverridesProvider>
+            <PortfolioApp />
+        </OverridesProvider>
     );
 }
 

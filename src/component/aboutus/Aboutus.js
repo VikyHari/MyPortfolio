@@ -5,6 +5,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import { PersonalContent, Experience, Qualifications, SkillCategories } from '../../commoncontent/AboutusData';
 import SplitText from '../ui/SplitText';
 import MagneticBtn from '../ui/MagneticBtn';
+import { useOverrideText } from '../../theme/OverridesContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,9 +62,9 @@ function Aboutus() {
 
                 {/* ── Header ── */}
                 <div className="section-header">
-                    <div className="section-label rv">About Me</div>
+                    <div className="section-label rv">{useOverrideText('about.label', 'About Me')}</div>
                     <SplitText tag="h2" className="section-title about-title" stagger={0.06}>
-                        Full Stack Developer &amp; AI Engineer
+                        {useOverrideText('about.title', 'Full Stack Developer & AI Engineer')}
                     </SplitText>
                     <p className="section-subtitle rv">{PersonalContent.desc}</p>
                 </div>
