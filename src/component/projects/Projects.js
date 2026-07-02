@@ -52,9 +52,13 @@ function Projects() {
     const sectionRef  = useRef(null);
     const trackRef    = useRef(null);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    // Hooks must run unconditionally on every render, so both are read here
+    // (not inline further down, where the mobile header is behind an
+    // `isMobile &&` conditional) and just referenced below.
     // Mobile-only for now: the desktop view's title is a bespoke per-letter
     // "PROJECTS" scroll animation (see labelChars below) that isn't a plain
     // text node, so it's intentionally left out of live-theming for now.
+    const projectsLabelOverride = useOverrideText('projects.label', 'Projects');
     const projectsTitleOverride = useOverrideText('projects.title', null);
 
     useEffect(() => {
@@ -155,7 +159,7 @@ function Projects() {
             {isMobile && (
                 <div className="projects-inner">
                     <div className="section-header">
-                        <div className="section-label rv">{useOverrideText('projects.label', 'Projects')}</div>
+                        <div className="section-label rv">{projectsLabelOverride}</div>
                         <h2 className="section-title rv">
                             {projectsTitleOverride || (<>Things I've <span>Built</span></>)}
                         </h2>
