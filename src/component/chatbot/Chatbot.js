@@ -78,14 +78,15 @@ function Chatbot() {
                 throw new Error(data.error || 'Sorry, something went wrong. Please try again.');
             }
 
+            const appliedCount = Array.isArray(data.actions) ? data.actions.length : 0;
             setMessages((prev) => [
                 ...prev,
-                { id: nextId(), role: 'bot', text: data.reply || "Sorry, I don't have a reply for that." },
+                { id: nextId(), role: 'bot', text: data.reply || "Sorry, I don't have a reply for that.", appliedCount },
             ]);
 
             // applyActions re-validates every entry against the manifest itself —
             // it's safe to hand it the response as-is, trusted or not.
-            if (Array.isArray(data.actions) && data.actions.length > 0) {
+            if (appliedCount > 0) {
                 applyActions(data.actions);
                 setCooldownActive(true);
                 setTimeout(() => setCooldownActive(false), POST_ACTION_COOLDOWN_MS);
@@ -149,10 +150,16 @@ function Chatbot() {
                                 className={`chatbot__msg chatbot__msg--${m.role}${m.isError ? ' chatbot__msg--error' : ''}`}
                             >
                                 {m.text}
+                                {!!m.appliedCount && (
+                                    <div className="chatbot__msg-tag">
+                                        <i className="fa-solid fa-check" aria-hidden="true" /> Applied to your view
+                                    </div>
+                                )}
                             </div>
                         ))}
                         {isTyping && (
                             <div className="chatbot__msg chatbot__msg--bot chatbot__typing" aria-label="Assistant is typing">
+                                <span className="chatbot__typing-label">Thinking</span>
                                 <span /><span /><span />
                             </div>
                         )}

@@ -23,10 +23,24 @@
 const HEX_COLOR = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 const RGB_COLOR = /^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*(0|1|0?\.\d+)\s*)?\)$/;
 
+// A visitor (or the AI on their behalf) is far more likely to say "white" or
+// "hot pink" than "#ffffff" — accept a small, fixed allowlist of common CSS
+// color keywords too. This is still a closed whitelist check (Set.has), so
+// it's exactly as safe as the hex/rgb patterns: no string ever reaches the
+// DOM unless it's byte-for-byte one of these known-safe values.
+const NAMED_COLORS = new Set([
+    'white', 'black', 'red', 'orange', 'yellow', 'green', 'blue', 'purple',
+    'pink', 'cyan', 'teal', 'gray', 'grey', 'brown', 'gold', 'silver',
+    'navy', 'maroon', 'lime', 'indigo', 'violet', 'turquoise', 'coral',
+    'salmon', 'khaki', 'beige', 'ivory', 'crimson', 'magenta', 'olive',
+    'tan', 'plum', 'orchid', 'chocolate', 'skyblue', 'lightblue', 'darkblue',
+    'lightgreen', 'darkgreen', 'hotpink', 'deeppink',
+]);
+
 function isValidColor(value) {
     if (typeof value !== 'string') return false;
     const v = value.trim();
-    return HEX_COLOR.test(v) || RGB_COLOR.test(v);
+    return HEX_COLOR.test(v) || RGB_COLOR.test(v) || NAMED_COLORS.has(v.toLowerCase());
 }
 
 function isValidSizePx(value, min, max) {

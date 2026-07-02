@@ -200,6 +200,26 @@
     }
 }
 
+.chatbot__msg-tag {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 6px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--green);
+
+    i {
+        font-size: 0.65rem;
+    }
+}
+
+.chatbot__typing-label {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-right: 2px;
+}
+
 .chatbot__typing {
     display: flex;
     align-items: center;

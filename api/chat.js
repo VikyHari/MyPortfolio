@@ -188,10 +188,19 @@ module.exports = async function handler(req, res) {
             return res.status(200).json({ reply: rawText.slice(0, MAX_MESSAGE_LENGTH), actions: [] });
         }
 
-        const reply = typeof parsed.message === 'string' && parsed.message.trim()
+        let reply = typeof parsed.message === 'string' && parsed.message.trim()
             ? parsed.message.trim()
             : "Sorry, I don't have a reply for that.";
-        const actions = sanitizeActions(parsed.actions);
+        const rawActions = Array.isArray(parsed.actions) ? parsed.actions : [];
+        const actions = sanitizeActions(rawActions);
+
+        // The model attempted at least one change but every single one failed
+        // validation (bad id, out-of-range value, etc.) — say so rather than
+        // silently doing nothing, per the "surface a friendly I can't do that"
+        // requirement. Skip the note on partial success to avoid over-talking.
+        if (rawActions.length > 0 && actions.length === 0) {
+            reply += " (I wasn't actually able to apply that — try naming a specific color, section, or feature.)";
+        }
 
         return res.status(200).json({ reply, actions });
     } catch (err) {
