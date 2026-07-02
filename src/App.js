@@ -16,6 +16,7 @@ import Contact      from './component/contact/Contact';
 import Footer       from './component/footer/Footer';
 import Marquee      from './component/ui/Marquee';
 import TechStack    from './component/ui/TechStack';
+import Chatbot      from './component/chatbot/Chatbot';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -132,6 +133,7 @@ function App() {
             <TouchRipple />
             <ScrollProgress />
             <FloatingCTA />
+            <Chatbot />
 
             {/* ── Top nav (desktop + mobile hamburger) ── */}
             <nav className={`topnav${scrolled ? ' topnav--scrolled' : ''}`}>
