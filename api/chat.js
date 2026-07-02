@@ -20,7 +20,7 @@ const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GE
 // responses fast for what is a small chat widget, not a full chat app.
 const MAX_HISTORY_MESSAGES = 12; // only the most recent turns are sent
 const MAX_MESSAGE_LENGTH = 600; // hard cap per message, in characters
-const MAX_OUTPUT_TOKENS = 300; // keeps replies short
+const MAX_OUTPUT_TOKENS = 500; // keeps replies short but leaves room for a full sentence
 
 const SYSTEM_PROMPT = buildSystemPrompt();
 
@@ -71,6 +71,12 @@ module.exports = async function handler(req, res) {
                 generationConfig: {
                     maxOutputTokens: MAX_OUTPUT_TOKENS,
                     temperature: 0.4,
+                    // Gemini 2.5 Flash "thinks" before answering by default, and those
+                    // hidden thinking tokens are counted against maxOutputTokens — which
+                    // was silently eating the whole budget and cutting replies off after
+                    // a few words. This is a simple Q&A bot, so thinking adds latency and
+                    // quota cost with no benefit: turn it off.
+                    thinkingConfig: { thinkingBudget: 0 },
                 },
             }),
         });
